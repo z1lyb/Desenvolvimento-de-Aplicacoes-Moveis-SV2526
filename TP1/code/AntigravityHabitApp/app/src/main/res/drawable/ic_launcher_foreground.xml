@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="utf-8"?>
+<vector xmlns:android="http://schemas.android.com/apk/res/android"
+    android:width="108dp"
+    android:height="108dp"
+    android:viewportWidth="108"
+    android:viewportHeight="108">
+    <!-- Simple checkmark icon for habit tracker -->
+    <path
+        android:fillColor="#FFFFFF"
+        android:pathData="M42.5,73.4L20.1,51l7.1,-7.1l15.3,15.3l38.4,-38.4l7.1,7.1L42.5,73.4z" />
+</vector>

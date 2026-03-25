@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="utf-8"?>
+<navigation xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/nav_graph"
+    app:startDestination="@id/habitListFragment">
+
+    <!-- Primary Destination: the list of habits -->
+    <fragment
+        android:id="@+id/habitListFragment"
+        android:name="com.example.habittracker.ui.main.HabitListFragment"
+        android:label="Habits"
+        tools:layout="@layout/fragment_habit_list">
+        
+        <!-- Action to open the Bottom Sheet for adding habits -->
+        <action
+            android:id="@+id/action_habitListFragment_to_addHabitBottomSheet"
+            app:destination="@id/addHabitBottomSheet" />
+    </fragment>
+
+    <!-- Dialog Destination: Add habit form acting as a bottom sheet overlay -->
+    <dialog
+        android:id="@+id/addHabitBottomSheet"
+        android:name="com.example.habittracker.ui.add.AddHabitBottomSheet"
+        android:label="Add Habit"
+        tools:layout="@layout/fragment_add_habit" />
+</navigation>
