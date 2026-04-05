@@ -5,7 +5,7 @@ import kotlin.math.sqrt
 /**
  * Represents a vector, indicating an X and Y
  */
-data class Vec2 (var x : Double, var y : Double) {
+data class Vec2 (var x : Double, var y : Double) : Comparable<Vec2> {
     /**
      * Adds two vectors.
      */
@@ -23,8 +23,8 @@ data class Vec2 (var x : Double, var y : Double) {
     /**
      * Multiplies two vectors.
      */
-    operator fun times (other : Vec2) : Vec2 {
-        return Vec2(x * other.x, y * other.y)
+    operator fun times (scalar : Double) : Vec2 {
+        return Vec2(x * scalar, y * scalar)
     }
 
     /**
@@ -37,7 +37,7 @@ data class Vec2 (var x : Double, var y : Double) {
     /**
      * Compares the size of a vector to another, using their magnitudes.
      */
-    operator fun compareTo(other : Vec2) : Int {
+    override fun compareTo(other : Vec2) : Int {
         return magnitude().compareTo(other.magnitude())
     }
 
@@ -59,10 +59,13 @@ data class Vec2 (var x : Double, var y : Double) {
      * Normalizes the vector, creating a unit vector in its direction.
      */
     fun normalized() : Vec2 {
-        if (x == 0.0 || y == 0.0) throw IllegalStateException("Cannot normalize the zero vector.")
-        return Vec2(x / x, y / y)
+        if (magnitude() == 0.0) throw IllegalStateException("Cannot normalize the zero vector.")
+        return Vec2(x / magnitude(), y / magnitude())
     }
 
+    /**
+     * Obtains a value from the vector
+     */
     operator fun get(i : Int) : Double {
         when (i) {
             0 -> return x
@@ -70,4 +73,26 @@ data class Vec2 (var x : Double, var y : Double) {
             else -> throw IndexOutOfBoundsException("The inserted index does not exist in the vector.")
         }
     }
+}
+
+
+fun main () {
+    val a = Vec2 (3.0 , 4.0)
+    val b = Vec2 (1.0 , 2.0)
+    println ("a = $a") // a = Vec2 (x=3.0 , y =4.0)
+    println ("b = $b") // b = Vec2 (x=1.0 , y =2.0)
+    println ("a + b = ${a + b}") // a + b = Vec2 (x=4.0 , y =6.0)
+    println ("a - b = ${a - b}") // a - b = Vec2 (x=2.0 , y =2.0)
+    println ("a * 2.0 = ${a * 2.0} ") // a * 2.0 = Vec2 (x=6.0 , y =8.0)
+    println ("-a = ${ -a}") // -a = Vec2 (x= -3.0 , y= -4.0)
+    println ("|a| = ${a. magnitude ()}") // |a| = 5.0
+    println ("a dot b = ${a.dot(b)}") // a dot b = 11.0
+    println (" norm (a) = ${a. normalized ()}") // norm (a) = Vec2 (x=0.6 , y =0.8)
+    println ("a[0] = ${a [0]} ") // a[0] = 3.0
+    println ("a[1] = ${a [1]} ") // a[1] = 4.0
+    println ("a > b = ${a > b}") // a > b = true
+    println ("a < b = ${a < b}") // a < b = false
+    val vectors = listOf ( Vec2 (1.0 , 0.0) , Vec2 (3.0 , 4.0) , Vec2 (0.0 , 2.0) )
+    println (" Longest = ${ vectors.max()}") // Longest = Vec2 (x=3.0 , y =4.0)
+    println (" Shortest = ${ vectors.min()}") // Shortest = Vec2 (x=1.0 , y =0.0)
 }
