@@ -52,7 +52,7 @@ fun processEvents(events : List<Event>, handler : (Event) -> Unit){
     }
 }
 
-
+// main function, used for testing with test data
 fun main(){
     val events = listOf (
         Login ("alice", 1_000),

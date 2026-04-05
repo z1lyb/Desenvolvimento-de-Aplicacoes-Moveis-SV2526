@@ -124,5 +124,5 @@ fun main() {
     println("Id 1 after evict id -> ${cache2.get(1)}")
 
     // filterValues test
-    println(cache1.filterValues { it < 1 })
+    println("filterValues test: ${cache1.filterValues { it < 1 }}")
 }
