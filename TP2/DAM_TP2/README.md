@@ -22,8 +22,8 @@ excerpts. -->
 ## 5. Testing and Validation
 <!-- Testing strategy, test cases, scenarios, edge cases, and known limitations. -->
 ## 6. Usage Instructions
-<!-- How to run the project: requirements, setup, configuration, and execution steps.
--->
+<!-- How to run the project: requirements, setup, configuration, and execution steps. -->
+
 ---
 
 ## Autonomous Software Engineering Sections - only for [AC OK, AI OK] sections
@@ -43,6 +43,7 @@ AI-assisted. -->
 ## 11. Ethical and Responsible Use
 <!-- Reflect on risks, limitations, biases, or inappropriate outputs from AI tools
 and how they were handled. -->
+
 ---
 
 ## Development Process
@@ -54,10 +55,8 @@ continuous work (not only final commits). -->
 <!-- Main challenges, mistakes, insights, and skills acquired during the assignment.
 -->
 ## 14. Future Improvements
-<!-- Possible extensions, optimizations, or features that could be added in future
-3
-Tutorial 1 - Hello Kotlin. Hello Android World!
-work. -->
+<!-- Possible extensions, optimizations, or features that could be added in future work. -->
+
 ---
 
 ## 15. AI Usage Disclosure (Mandatory)
