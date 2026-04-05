@@ -1,9 +1,11 @@
 package dam.exer_4
 
+import kotlin.math.sqrt
+
 /**
  * Represents a vector, indicating an X and Y
  */
-data class Vec2 (var x : Int, var y : Int) {
+data class Vec2 (var x : Double, var y : Double) {
     /**
      * Adds two vectors.
      */
@@ -30,5 +32,33 @@ data class Vec2 (var x : Int, var y : Int) {
      */
     operator fun unaryMinus () : Vec2 {
         return Vec2(-x, -y)
+    }
+
+    /**
+     * Compares the size of a vector to another, using their magnitudes.
+     */
+    operator fun compareTo(other : Vec2) : Int {
+        return magnitude().compareTo(other.magnitude())
+    }
+
+    /**
+     * Calculates the Euclidean magnitude of a vector.
+     */
+    fun magnitude() : Double {
+        return sqrt(((x * x) + (y * y)))
+    }
+
+    /**
+     * Dot product of two vectors
+     */
+    fun dot(other : Vec2) : Double {
+        return x * other.x + y * other.y
+    }
+
+    /**
+     * Normalizes the vector, creating a unit vector in its direction.
+     */
+    fun normalized() : Vec2 {
+        return Vec2(x / x, y / y)
     }
 }
