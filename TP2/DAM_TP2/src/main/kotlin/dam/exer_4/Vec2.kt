@@ -73,8 +73,19 @@ data class Vec2 (var x : Double, var y : Double) : Comparable<Vec2> {
             else -> throw IndexOutOfBoundsException("The inserted index does not exist in the vector.")
         }
     }
+
+    // The data class already automatically implements component1 and component2.
+    // operator fun component1(): Double = x
+    // operator fun component2(): Double = y
+
 }
 
+/**
+ * Left-hand scalar multiplication of a double with a vector.
+ */
+operator fun Double.times(vector : Vec2) : Vec2 {
+    return vector * this
+}
 
 fun main () {
     val a = Vec2 (3.0 , 4.0)
@@ -95,4 +106,8 @@ fun main () {
     val vectors = listOf ( Vec2 (1.0 , 0.0) , Vec2 (3.0 , 4.0) , Vec2 (0.0 , 2.0) )
     println (" Longest = ${ vectors.max()}") // Longest = Vec2 (x=3.0 , y =4.0)
     println (" Shortest = ${ vectors.min()}") // Shortest = Vec2 (x=1.0 , y =0.0)
+
+    println("Left-hand scalar mult: 2.0 * a = ${2.0 * a}")
+    val (x, y) = a
+    println("Destructuring declarations: a = $x,$y")
 }
