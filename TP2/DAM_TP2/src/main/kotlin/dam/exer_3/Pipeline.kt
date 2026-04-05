@@ -6,6 +6,7 @@ package dam.exer_3
 class Pipeline {
     // internally stores a list of steps, paired with their names
     private var steps = mutableListOf<( (List<String>) -> List<String> )>()
+    private var stepNames = emptyList<String>()
 
     /**
      * Adds a named stage to the pipeline.
@@ -13,7 +14,8 @@ class Pipeline {
      * @param transform step to add to the pipeline
      */
     fun addStage(name: String, transform: (List<String>) -> List<String>) {
-        steps.add(transform);
+        steps.add(transform)
+        stepNames += name
     }
 
     /**
@@ -33,8 +35,8 @@ class Pipeline {
      * Prints the name of every pipeline step, in order.
      */
     fun describe() {
-        for (step in steps) {
-            println(step)
+        for (step in stepNames) {
+            println("\t ${stepNames.indexOf(step) + 1}.  $step")
         }
     }
 }
@@ -49,4 +51,30 @@ fun buildPipeline(lambda : Pipeline.() -> Unit) : Pipeline {
     val pipeline = Pipeline()
     pipeline.lambda()
     return pipeline
+}
+
+fun main() {
+    val pipeline = buildPipeline({
+        addStage("Trim", {list -> list.map {it.trim()} }) // trims each element
+        addStage("Filter errors", {list -> list.filter {it.startsWith("ERROR")} }) // only keeps elements that start with ERROR
+        addStage("Uppercase", {list -> list.map {it.uppercase()} }) // makes each element uppercase
+        addStage("Add index", {list -> list.mapIndexed { idx, str -> "${idx+1}. $str " }})
+    })
+
+    val logs = listOf(
+        " INFO : server started ",
+        " ERROR : disk full ",
+        " DEBUG : checking config ",
+        " ERROR : out of memory ",
+        " INFO : request received ",
+        " ERROR : connection timeout "
+    )
+
+    val result = pipeline.execute(logs)
+    println("Pipeline stages:")
+    pipeline.describe()
+    println("Result:")
+    for (element in result) {
+        println("\t $element")
+    }
 }
