@@ -59,6 +59,15 @@ data class Vec2 (var x : Double, var y : Double) {
      * Normalizes the vector, creating a unit vector in its direction.
      */
     fun normalized() : Vec2 {
+        if (x == 0.0 || y == 0.0) throw IllegalStateException("Cannot normalize the zero vector.")
         return Vec2(x / x, y / y)
+    }
+
+    operator fun get(i : Int) : Double {
+        when (i) {
+            0 -> return x
+            1 -> return y
+            else -> throw IndexOutOfBoundsException("The inserted index does not exist in the vector.")
+        }
     }
 }
