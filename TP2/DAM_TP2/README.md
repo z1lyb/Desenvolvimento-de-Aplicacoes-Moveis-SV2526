@@ -1,17 +1,29 @@
-# Assignment 2 - Weather App
+# Assignment 2 - Weather App 
 
-Course: Desenvolvimento de Aplicações Móveis
-Student(s): Zilda Biai (51606)
-Date: 12/04/2026
+Course: Desenvolvimento de Aplicações Móveis  
+Student(s): Zilda Biai (51606)  
+Date: 12/04/2026  
 Repository URL: [Repository](https://github.com/z1lyb/Desenvolvimento-de-Aplicacoes-Moveis-SV2526/tree/main/TP2/DAM_TP2)
 
 ---
 
-## Tutorial 2 - Kotlin Exercises
+# Tutorial 2 - Kotlin Exercises
 
 ## 1. Introduction
-<!-- Purpose of the assignment, problem description, and objectives. -->
+O presente repositório foi criado no âmbito da disciplina de Desenvolvimento de Aplicações Móveis, durante a realização 
+do segundo tutorial da disciplina. Este relatório consistirá na descrição do trabalho referente à _**Section 1 - Kotlin Exercises**_.  
+Durante a sua realização, são consolidados mais conceitos da linguagem Kotlin, como _extension functions_, _generics_ e composição de funções.
 ## 2. System Overview
+O sistema desenvolvido é composto pela resolução dos quatro exercícios:
+1. Event Log Processing  
+  Desenvolvimento dos conceitos de _sealed classes_, _extension functions_ e _higher-order functions_, com
+o desenvolvimento de uma classe que processa eventos por meio de funções.
+2. Memory Cache
+    
+3. Configurable Data Pipeline
+    
+4. 2D Vector Library
+    
 <!-- High-level description of the solution, main features, and use cases. -->
 ## 3. Architecture and Design
 <!-- Architecture, folder structure, design patterns, and justification of key
@@ -26,7 +38,7 @@ excerpts. -->
 
 ---
 
-## Autonomous Software Engineering Sections - only for [AC OK, AI OK] sections
+# Autonomous Software Engineering Sections - only for [AC OK, AI OK] sections
 
 ## 7. Prompting Strategy
 <!-- Describe the prompts used with AI tools, their purpose, and how they evolved.
@@ -46,7 +58,7 @@ and how they were handled. -->
 
 ---
 
-## Development Process
+# Development Process
 
 ## 12. Version Control and Commit History
 <!-- Describe how version control was used. The commit history must reflect
