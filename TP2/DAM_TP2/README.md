@@ -53,8 +53,26 @@ Adicionalmente, a _higher-order function_ **processEvents** recebe uma lista de 
 Após aplicar cada um, imprime uma descrição da operação realizada.
 
 ### Exercise 2 - Memory Cache
+Neste exercício, é criada a classe genérica Cache, que mapeia chaves a valores de qualquer tipo num _mutableMap_ interno.  
+É composta pelas funções:
+* **put** - cria ou altera uma entrada.
+* **get** - retorna o valor associado a uma chave, ou null se esta não existir.
+* **evict** - remove uma entrada.
+* **size** - retorna o número de entradas.
+* **getOrPut** - se houver uma determinada chave no mapa, retorna-a. caso contrário, computa-a e retorna o valor.
+* **transform** - aplica uma transformação ao valor de uma chave.
+* **snapshot** - torna o mapa inalterável, retornando-o.
+* **filterValues** - filtra os valores por uma condição
 
 ### Exercise 3 - Configurable Data Pipeline
+Implementação de um _pipeline_ que guarda um conjunto de transformações e as aplica a uma lista de Strings.  
+É composta por:
+* **addStage** - adiciona um passo e o seu nome ao _pipeline_.
+* **execute**
+* **describe**
+* **then**
+* **compose**
+
 
 ### Exercise 4 - 2D Vector Library
 
