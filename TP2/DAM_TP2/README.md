@@ -41,7 +41,7 @@ O projeto está organizado por _packages_, situadas dentro do _package_ raiz dam
     * Vec2
 
 ## 4. Implementation
-### Exercício 1 - Event Log Processing
+### Exercise 1 - Event Log Processing
 Foi criada a _sealed class_ **Event**, que controla a herança das suas subclasses, **Login**, **Purchase** e **Logout**.
 Cada uma das classes filhas guarda o _username_ do autor do evento, e _timestamp_ da sua utilização, com parâmetros adicionais
 caso necessário. 
@@ -52,11 +52,11 @@ A classe conta com duas _extension functions_:
 Adicionalmente, a _higher-order function_ **processEvents** recebe uma lista de eventos e um _lambda_ a ser aplicado a todos eles. 
 Após aplicar cada um, imprime uma descrição da operação realizada.
 
-### Exercício 2 - Memory Cache
+### Exercise 2 - Memory Cache
 
-### Exercício 3 - Configurable Data Pipeline
+### Exercise 3 - Configurable Data Pipeline
 
-### Exercício 4 - 2D Vector Library
+### Exercise 4 - 2D Vector Library
 
 <!-- Implementation details: main modules, components, algorithms, and relevant code
 excerpts. -->
