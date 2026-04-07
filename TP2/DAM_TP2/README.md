@@ -18,17 +18,46 @@ O sistema desenvolvido é composto pela resolução dos quatro exercícios:
 1. Event Log Processing  
   Desenvolvimento dos conceitos de _sealed classes_, _extension functions_ e _higher-order functions_, com
 o desenvolvimento de uma classe que processa eventos por meio de funções.
-2. Memory Cache
-    
-3. Configurable Data Pipeline
-    
-4. 2D Vector Library
-    
-<!-- High-level description of the solution, main features, and use cases. -->
+2. Memory Cache  
+    Criação de uma cache de memória, consolidando os conceitos de _generics_ e funções com parâmetros de tipo.
+3. Configurable Data Pipeline  
+    Criação de uma _pipeline_ de processamento de dados configurável, utilizando _lambdas_ e composição de funções para 
+usar uma sequência de passos configuráveis para alterar uma sequência de strings.
+4. 2D Vector Library  
+    Implementação de uma classe representativa de um vetor 2D e as operações a si associadas, de modo a usar o conceito de 
+_operator overloading_.  
+
+Todas as classes criadas são testadas com dados fornecidos com esse objetivo.
 ## 3. Architecture and Design
-<!-- Architecture, folder structure, design patterns, and justification of key
-decisions. -->
+O projeto está organizado por _packages_, situadas dentro do _package_ raiz dam e separadas por exercício. A arquitetura segue a seguinte estrutura:
+* dam
+  * exer_1
+    * Event
+  * exer_2
+    * Cache
+  * exer_3
+    * Pipeline
+  * exer_4
+    * Vec2
+
 ## 4. Implementation
+### Exercício 1 - Event Log Processing
+Foi criada a _sealed class_ **Event**, que controla a herança das suas subclasses, **Login**, **Purchase** e **Logout**.
+Cada uma das classes filhas guarda o _username_ do autor do evento, e _timestamp_ da sua utilização, com parâmetros adicionais
+caso necessário. 
+A classe conta com duas _extension functions_:
+* **filterByUser** - recebe um _username_ e retorna uma lista dos eventos a ele afetados.
+* **totalSpent** - calcula o montante total gasto pelo utilizador entre todas as suas operações do tipo Purchase.
+
+Adicionalmente, a _higher-order function_ **processEvents** recebe uma lista de eventos e um _lambda_ a ser aplicado a todos eles. 
+Após aplicar cada um, imprime uma descrição da operação realizada.
+
+### Exercício 2 - Memory Cache
+
+### Exercício 3 - Configurable Data Pipeline
+
+### Exercício 4 - 2D Vector Library
+
 <!-- Implementation details: main modules, components, algorithms, and relevant code
 excerpts. -->
 ## 5. Testing and Validation
