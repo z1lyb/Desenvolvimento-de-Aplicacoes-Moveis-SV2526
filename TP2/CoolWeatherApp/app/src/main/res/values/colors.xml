@@ -4,10 +4,12 @@
     <color name="white">#FFFFFFFF</color>
     <color name="purple_500">#FF6200EE</color>
     <color name="purple_700">#FF3700B3</color>
-    <color name="blue">#FF0000FF</color>
-    <color name="dark_blue">#FF00008B</color>
+    <color name="blue">#6784c4</color>
+    <color name="dark_blue">#131e37</color>
     <color name="teal_200">#FF03DAC5</color>
     <color name="teal_700">#FF018786</color>
     <color name="viewBG">#CF48B34D</color>
+    <color name="viewBG_dark">#CF062108</color>
     <color name="WeatherLabel">#F629852F</color>
+    <color name="WeatherLabel_dark">#CF1F8026</color>
 </resources>
