@@ -1,5 +1,6 @@
 package damA51606.coolweatherapp
 
+import android.content.res.Configuration
 import android.os.Bundle
 import androidx.activity.enableEdgeToEdge
 import androidx.appcompat.app.AppCompatActivity
@@ -10,6 +11,27 @@ class MainActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         enableEdgeToEdge()
+
+        val day = true
+
+        when (resources.configuration.orientation) {
+            Configuration.ORIENTATION_PORTRAIT -> {
+                if (day) {
+                    setTheme(R.style.Theme_Day)
+                } else {
+                    setTheme (R.style.Theme_Night)
+                }
+            }
+            Configuration. ORIENTATION_LANDSCAPE -> {
+                if (day) {
+                    setTheme (R.style.Theme_Day_Land)
+                } else {
+                    setTheme (R.style.Theme_Night_Land)
+                }
+            }
+        }
+
+
         setContentView(R.layout.activity_main)
         ViewCompat.setOnApplyWindowInsetsListener(findViewById(R.id.main)) { v, insets ->
             val systemBars = insets.getInsets(WindowInsetsCompat.Type.systemBars())
