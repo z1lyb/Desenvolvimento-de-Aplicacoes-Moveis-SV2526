@@ -8,6 +8,7 @@ import android.widget.ImageView
 import android.widget.TextView
 import androidx.activity.enableEdgeToEdge
 import androidx.appcompat.app.AppCompatActivity
+import androidx.constraintlayout.widget.ConstraintLayout
 import androidx.core.view.ViewCompat
 import androidx.core.view.WindowInsetsCompat
 import java.io.InputStreamReader
@@ -66,7 +67,7 @@ class MainActivity : AppCompatActivity() {
             append("https://api.open-meteo.com/v1/forecast?")
             append("latitude=${lat}&longitude=${long}&")
             append("current_weather=true&")
-            append("timezone=auto&")
+            append("timezone=auto&") // for showing the time correctly
             append("hourly=temperature_2m,weathercode,pressure_msl,windspeed_10m")
         }
         val url = URL(reqString)
@@ -86,9 +87,10 @@ class MainActivity : AppCompatActivity() {
     private fun updateUI(request: WeatherData) {
         runOnUiThread {
             // changing the background depending on the local time
-            day = request.current_weather.isday == 1
+            day = request.current_weather.is_day == 1
 
             // get UI elements
+            val bg : ConstraintLayout = findViewById(R.id.container)
             val weatherImage : ImageView = findViewById(R.id.weather_icon)
             val temperature : TextView = findViewById(R.id.temperature_text)
             val pressure : TextView = findViewById(R.id.sea_lvl_text)
@@ -97,6 +99,7 @@ class MainActivity : AppCompatActivity() {
             val time : TextView = findViewById(R.id.time_text)
 
             // alter UI elements
+            changeBackground(bg)
             temperature.text = request.hourly.temperature_2m.get(12).toString() + " ºC"
             pressure.text = request.hourly.pressure_msl.get(12).toString() + " hPa"
             winddir.text = getWindDirection(request.current_weather.winddirection)
@@ -134,5 +137,22 @@ class MainActivity : AppCompatActivity() {
             dir in 293..336-> "NW"
             else -> "?"
         }
+    }
+
+    private fun changeBackground(bg : ConstraintLayout){
+
+        val orientation = resources.configuration.orientation
+        val newTheme = if (day) {
+            if (orientation == Configuration.ORIENTATION_PORTRAIT) R.style.Theme_Day else R.style.Theme_Day_Land
+        } else {
+            if (orientation == Configuration.ORIENTATION_PORTRAIT) R.style.Theme_Night else R.style.Theme_Night_Land
+        }
+
+        setTheme(newTheme)
+
+        val typedValue = android.util.TypedValue()
+
+        theme.resolveAttribute(android.R.attr.windowBackground, typedValue, true)
+        if(typedValue.resourceId != 0) bg.setBackgroundResource(typedValue.resourceId)
     }
 }

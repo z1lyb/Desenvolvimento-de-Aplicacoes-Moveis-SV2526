@@ -5,14 +5,14 @@ data class WeatherData (
     var longitude : String,
     var timezone : String,
     var current_weather : CurrentWeather,
-    var hourly : Hourly
+    var hourly : Hourly,
 )
 data class CurrentWeather (
     var temperature: Float,
     var windspeed : Float,
     var winddirection : Int,
     var weathercode : Int,
-    var isday: Int,
+    var is_day: Int,
     var time : String
 )
 data class Hourly (
