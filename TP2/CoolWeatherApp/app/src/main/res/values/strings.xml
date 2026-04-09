@@ -1,4 +1,14 @@
 <resources>
     <string name="app_name">Cool Weather App</string>
     <string name="button_text">UPDATE</string>
+    <string name="latitude_label">Latitude</string>
+    <string name="latitude_hint">38.76</string>
+    <string name="longitude_label">Longitude</string>
+    <string name="longitude_hint">-9.12</string>
+    <string name="sea_lvl_label">Sea level pressure</string>
+    <string name="wind_dir_label">Wind direction</string>
+    <string name="wind_spd_label">Wind speed</string>
+    <string name="temperature_label">Temperature</string>
+    <string name="time_label">Time</string>
+    <string name="placeholder">--</string>
 </resources>

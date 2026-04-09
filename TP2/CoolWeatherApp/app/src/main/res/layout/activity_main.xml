@@ -38,6 +38,161 @@
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/weather_icon">
 
+            <TextView
+                android:id="@+id/latitude_label"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="10dp"
+                android:background="?attr/background"
+                android:fontFamily="sans-serif-smallcaps"
+                android:text="@string/latitude_label"
+                app:layout_constraintBottom_toTopOf="@+id/longitude_label"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent" />
+
+            <TextView
+                android:id="@+id/longitude_label"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:background="?attr/background"
+                android:fontFamily="sans-serif-smallcaps"
+                android:text="@string/longitude_label"
+                app:layout_constraintBottom_toTopOf="@+id/textView7"
+                app:layout_constraintStart_toStartOf="@+id/latitude_label"
+                app:layout_constraintTop_toBottomOf="@+id/latitude_label" />
+
+            <TextView
+                android:id="@+id/textView5"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:background="?attr/background"
+                android:fontFamily="sans-serif-smallcaps"
+                android:text="@string/wind_dir_label"
+                app:layout_constraintBottom_toTopOf="@+id/textView6"
+                app:layout_constraintStart_toStartOf="@+id/textView4"
+                app:layout_constraintTop_toBottomOf="@+id/textView4" />
+
+            <TextView
+                android:id="@+id/textView4"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:background="?attr/background"
+                android:fontFamily="sans-serif-smallcaps"
+                android:text="@string/sea_lvl_label"
+                app:layout_constraintBottom_toTopOf="@+id/textView5"
+                app:layout_constraintStart_toStartOf="@+id/textView7"
+                app:layout_constraintTop_toBottomOf="@+id/textView7" />
+
+            <TextView
+                android:id="@+id/textView7"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:background="?attr/background"
+                android:fontFamily="sans-serif-smallcaps"
+                android:text="@string/temperature_label"
+                app:layout_constraintBottom_toTopOf="@+id/textView4"
+                app:layout_constraintStart_toStartOf="@+id/longitude_label"
+                app:layout_constraintTop_toBottomOf="@+id/longitude_label" />
+
+            <TextView
+                android:id="@+id/textView6"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:background="?attr/background"
+                android:fontFamily="sans-serif-smallcaps"
+                android:text="@string/wind_spd_label"
+                app:layout_constraintBottom_toTopOf="@+id/textView8"
+                app:layout_constraintStart_toStartOf="@+id/textView5"
+                app:layout_constraintTop_toBottomOf="@+id/textView5" />
+
+            <TextView
+                android:id="@+id/textView8"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:background="?attr/background"
+                android:fontFamily="sans-serif-smallcaps"
+                android:text="@string/time_label"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintStart_toStartOf="@+id/textView6"
+                app:layout_constraintTop_toBottomOf="@+id/textView6" />
+
+            <TextView
+                android:id="@+id/temperature_text"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:background="?attr/background"
+                android:fontFamily="sans-serif-smallcaps"
+                android:text="@string/placeholder"
+                app:layout_constraintBaseline_toBaselineOf="@+id/textView7"
+                app:layout_constraintEnd_toEndOf="@+id/edit_longitude" />
+
+            <TextView
+                android:id="@+id/sea_lvl_text"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:background="?attr/background"
+                android:fontFamily="sans-serif-smallcaps"
+                android:text="@string/placeholder"
+                app:layout_constraintBaseline_toBaselineOf="@+id/textView4"
+                app:layout_constraintEnd_toEndOf="@+id/temperature_text" />
+
+            <TextView
+                android:id="@+id/wind_dir_text"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:background="?attr/background"
+                android:fontFamily="sans-serif-smallcaps"
+                android:text="@string/placeholder"
+                app:layout_constraintBaseline_toBaselineOf="@+id/textView5"
+                app:layout_constraintEnd_toEndOf="@+id/sea_lvl_text" />
+
+            <TextView
+                android:id="@+id/wind_spd_text"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:background="?attr/background"
+                android:fontFamily="sans-serif-smallcaps"
+                android:text="@string/placeholder"
+                app:layout_constraintBaseline_toBaselineOf="@+id/textView6"
+                app:layout_constraintEnd_toEndOf="@+id/wind_dir_text" />
+
+            <TextView
+                android:id="@+id/time_text"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:background="?attr/background"
+                android:fontFamily="sans-serif-smallcaps"
+                android:text="@string/placeholder"
+                app:layout_constraintBaseline_toBaselineOf="@+id/textView8"
+                app:layout_constraintEnd_toEndOf="@+id/wind_spd_text" />
+
+            <EditText
+                android:id="@+id/edit_latitude"
+                android:layout_width="wrap_content"
+                android:layout_height="18dp"
+                android:layout_marginEnd="10dp"
+                android:background="?attr/background"
+                android:fontFamily="sans-serif-smallcaps"
+                android:hint="@string/latitude_hint"
+                android:inputType="numberDecimal|numberSigned"
+                android:textColor="?attr/android:textColor"
+                app:layout_constraintBaseline_toBaselineOf="@+id/latitude_label"
+                app:layout_constraintBottom_toTopOf="@+id/edit_longitude"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintTop_toTopOf="parent" />
+
+            <EditText
+                android:id="@+id/edit_longitude"
+                android:layout_width="wrap_content"
+                android:layout_height="18dp"
+                android:background="?attr/background"
+                android:fontFamily="sans-serif-smallcaps"
+                android:hint="@string/longitude_hint"
+                android:inputType="numberDecimal|numberSigned"
+                android:textColor="?attr/android:textColor"
+                app:layout_constraintBaseline_toBaselineOf="@+id/longitude_label"
+                app:layout_constraintEnd_toEndOf="@+id/edit_latitude" />
+
         </androidx.constraintlayout.widget.ConstraintLayout>
 
         <ImageView
