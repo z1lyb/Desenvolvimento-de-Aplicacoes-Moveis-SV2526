@@ -11,7 +11,7 @@ class MainActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         enableEdgeToEdge()
 
-        val day = true
+        val day = false
 
         when (resources.configuration.orientation) {
             Configuration.ORIENTATION_PORTRAIT -> {
