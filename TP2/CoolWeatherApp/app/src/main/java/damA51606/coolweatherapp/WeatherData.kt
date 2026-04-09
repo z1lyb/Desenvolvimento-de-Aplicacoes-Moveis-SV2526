@@ -12,6 +12,7 @@ data class CurrentWeather (
     var windspeed : Float,
     var winddirection : Int,
     var weathercode : Int,
+    var isday: Int,
     var time : String
 )
 data class Hourly (
@@ -22,7 +23,7 @@ data class Hourly (
 )
 
 enum class WMO_WeatherCode(var code: Int, var image: String) {
-    CLEAR_SKY(0,"clear_ "),
+    CLEAR_SKY(0,"clear_"),
     MAINLY_CLEAR(1,"mostly_clear_"),
     PARTLY_CLOUDY(2,"partly_cloudy_"),
     OVERCAST(3 ,"cloudy"),
