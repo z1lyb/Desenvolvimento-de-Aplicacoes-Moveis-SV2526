@@ -31,6 +31,7 @@ interface ApiService {
     suspend fun searchImages(
         @Query("api_key") apiKey: String,
         @Query("limit") limit: Int = 100,
+        @Query("page") page: Int = 0,
         @Query("has_breeds") hasBreeds: Int = 1
     ): List<ImageItem>
 

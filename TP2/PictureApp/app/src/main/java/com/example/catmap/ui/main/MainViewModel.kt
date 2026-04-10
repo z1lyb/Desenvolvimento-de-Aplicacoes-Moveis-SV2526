@@ -26,6 +26,10 @@ class MainViewModel : ViewModel() {
     /** Observed by [MainActivity] to show/hide the ProgressBar. */
     val isLoading: LiveData<Boolean> = _isLoading
 
+    private val _loadingProgress = MutableLiveData(0)
+    /** Observed by [MainActivity] to update current loading percentage. */
+    val loadingProgress: LiveData<Int> = _loadingProgress
+
     private val _errorMessage = MutableLiveData<String?>(null)
     /** Observed by [MainActivity] to display error messages. */
     val errorMessage: LiveData<String?> = _errorMessage
@@ -41,20 +45,23 @@ class MainViewModel : ViewModel() {
     fun fetchImages() {
         _isLoading.value = true
         _errorMessage.value = null // Clear previous errors
+        _loadingProgress.value = 0
 
         viewModelScope.launch {
-            when (val result = repository.getImages()) {
-                is Resource.Success -> {
-                    _isLoading.value = false
-                    _images.value = result.data
-                }
-                is Resource.Error -> {
-                    _isLoading.value = false
-                    _errorMessage.value = result.message
-                }
-                // ImageRepository doesn't currently return Resource.Loading, but it's handled here for completeness
-                is Resource.Loading -> {
-                    _isLoading.value = true
+            repository.getImages().collect { result ->
+                when (result) {
+                    is Resource.Success -> {
+                        _isLoading.value = false
+                        _images.value = result.data
+                    }
+                    is Resource.Error -> {
+                        _isLoading.value = false
+                        _errorMessage.value = result.message
+                    }
+                    is Resource.Loading -> {
+                        _isLoading.value = true
+                        _loadingProgress.value = result.progress
+                    }
                 }
             }
         }

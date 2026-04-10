@@ -35,3 +35,15 @@ Create and set an app icon
 
 Step 12
 Implement dark mode
+
+Step 13
+Implement progress bar for loading images
+
+Step 14
+Implement favorite items functionality
+
+Step 15
+Implement cache of up to 50 items (excluding favorites)
+
+Step 16
+Implement offline access to cached items and favorites

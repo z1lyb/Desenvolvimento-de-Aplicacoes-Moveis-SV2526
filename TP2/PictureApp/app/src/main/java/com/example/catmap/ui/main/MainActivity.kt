@@ -102,6 +102,11 @@ class MainActivity : AppCompatActivity() {
                 binding.layoutError.visibility = View.GONE
             }
         }
+
+        // Observe loading progress for the linear indicator
+        viewModel.loadingProgress.observe(this) { progress ->
+            binding.progressBar.setProgress(progress, true)
+        }
     }
 
     override fun onCreateOptionsMenu(menu: android.view.Menu): Boolean {

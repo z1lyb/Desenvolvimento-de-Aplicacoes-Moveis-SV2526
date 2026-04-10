@@ -3,13 +3,15 @@ package com.example.catmap.repository
 import com.example.catmap.model.ImageItem
 import com.example.catmap.model.Resource
 import com.example.catmap.network.RetrofitClient
+import kotlinx.coroutines.flow.Flow
+import kotlinx.coroutines.flow.flow
 
 /**
  * Single source of truth for image data.
  *
  * Wraps all network calls in a [Resource] so the ViewModel layer never needs to
  * handle raw exceptions. Two operations are exposed:
- *  - [getImages]     : fetch the main gallery list.
+ *  - [getImages]     : fetch the main gallery list as a stream of progress/success.
  *  - [getImageById]  : fetch full details for a single image (detail screen).
  */
 class ImageRepository {
@@ -17,21 +19,35 @@ class ImageRepository {
     private val apiService = RetrofitClient.apiService
 
     /**
-     * Fetches up to [limit] cat images that have breed information attached.
+     * Fetches up to [totalLimit] cat images that have breed information attached.
+     * Fetches in batches of 20 to provide loading progress updates.
      *
-     * @param limit Number of images to retrieve (default 100).
-     * @return [Resource.Success] with a list of [ImageItem], or [Resource.Error] on failure.
+     * @param totalLimit Number of images to retrieve (default 100).
+     * @return A [Flow] of [Resource] states (Loading, Success, or Error).
      */
-    suspend fun getImages(limit: Int = 100): Resource<List<ImageItem>> {
-        return try {
-            val images = apiService.searchImages(
-                apiKey = RetrofitClient.API_KEY,
-                limit = limit,
-                hasBreeds = 1
-            )
-            Resource.Success(images)
+    fun getImages(totalLimit: Int = 100): Flow<Resource<List<ImageItem>>> = flow {
+        val batchSize = 20
+        val batches = totalLimit / batchSize
+        val allImages = mutableListOf<ImageItem>()
+
+        try {
+            for (i in 0 until batches) {
+                // Emit progress (0%, 20%, 40%, 60%, 80%)
+                emit(Resource.Loading(progress = (i * 100) / batches))
+
+                val batchImages = apiService.searchImages(
+                    apiKey = RetrofitClient.API_KEY,
+                    limit = batchSize,
+                    page = i,
+                    hasBreeds = 1
+                )
+                allImages.addAll(batchImages)
+            }
+            // Emit final success state
+            emit(Resource.Loading(progress = 100))
+            emit(Resource.Success(allImages))
         } catch (e: Exception) {
-            Resource.Error(e.message ?: "An unexpected error occurred.")
+            emit(Resource.Error(e.message ?: "An unexpected error occurred."))
         }
     }
 

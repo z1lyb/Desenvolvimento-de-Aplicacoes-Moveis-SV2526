@@ -51,13 +51,13 @@
             android:visibility="gone" />
 
         <!-- Loading indicator (feature 4: show loading indicator) -->
-        <ProgressBar
+        <com.google.android.material.progressindicator.LinearProgressIndicator
             android:id="@+id/progressBar"
-            style="?android:attr/progressBarStyleLarge"
-            android:layout_width="wrap_content"
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_gravity="center"
-            android:indeterminateTint="@color/primary"
+            android:layout_gravity="top"
+            android:max="100"
+            app:indicatorColor="@color/primary"
             android:visibility="visible" />
 
         <!-- Error state (feature 6: show error message) -->

@@ -108,3 +108,13 @@ Goal: Implementing a dark mode for the app
 Prompt: Create a dark theme for the app for dark mode users, where the background is black and the text is white. The toolbar and buttons are a darker shade of its current color.
 
 Result: Created more color resources and a dark theme for the app.
+
+---
+
+## Prompt 12
+
+Goal: Implementing a loading progress bar for the app
+
+Prompt: According to the 09_extensions.md file, implement step 13 - loading progress bar for the app, to be presented while images are loading or refreshing. The progress bar should represent how far along the process of fetching images the application is.
+
+Result: Instead of a loading circle, a linear progress bar is shown at the top of the screen while images are loading or refreshing. It shows the progress of fetching images as a percentage.

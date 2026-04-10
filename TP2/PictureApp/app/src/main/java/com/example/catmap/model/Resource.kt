@@ -16,6 +16,6 @@ sealed class Resource<out T> {
     /** The API call failed; [message] describes the error. */
     data class Error(val message: String) : Resource<Nothing>()
 
-    /** A network call is in progress. */
-    object Loading : Resource<Nothing>()
+    /** A network call is in progress. [progress] holds the percentage (0-100). */
+    data class Loading(val progress: Int = 0) : Resource<Nothing>()
 }
