@@ -98,3 +98,13 @@ Goal: Set an app icon and name in toolbar
 Prompt: Set the app icon using the resource @drawable/app_icon which I have placed in the drawable folder, first generating a Vector Asset based on it. Use it as an icon as well as show it in the app toolbar, before the app name.
 
 Result: App icon set and shown in the toolbar before the app name.
+
+--
+
+## Prompt 11
+
+Goal: Implementing a dark mode for the app
+
+Prompt: Create a dark theme for the app for dark mode users, where the background is black and the text is white. The toolbar and buttons are a darker shade of its current color.
+
+Result: Created more color resources and a dark theme for the app.

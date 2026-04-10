@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <!-- Darker shade of current color for toolbar and buttons -->
+    <color name="primary">#B03A1F</color>
+    <color name="primary_dark">#8A2E18</color>
+    <color name="primary_light">#D64C2B</color>
+
+    <!-- Darker secondary -->
+    <color name="secondary">#C8831A</color>
+    <color name="secondary_dark">#A16A15</color>
+
+    <!-- Black background -->
+    <color name="background">#000000</color>
+    <color name="surface">#121212</color>
+
+    <!-- White text -->
+    <color name="on_surface">#FFFFFF</color>
+    <color name="text_secondary">#B3B3B3</color>
+
+    <color name="card_stroke">#333333</color>
+</resources>
