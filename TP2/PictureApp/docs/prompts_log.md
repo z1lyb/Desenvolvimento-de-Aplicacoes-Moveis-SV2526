@@ -25,3 +25,22 @@ Goal: Implementing the API service to fetch images from The Cat API.
 Prompt: Using infotmation from 07_api_usage.md, implement step 3 - the API service needed to get picture and cat breed information from The Cat API.
 
 Result: API service and access to The Cat API implemented, with a starting limit of 30 images per fetch.
+
+--
+
+## Prompt 4
+
+Goal: Creating the RecyclerView adapter for the image grid
+
+Prompt: Referring to the featues and screens files in the docs folder, create the RecyclerView adapter for the image grid.
+
+Result: Created the ImageAdapter class, with the necessary methods to display the images in a grid.
+
+--
+
+## 
+##
+##
+##
+##
+##

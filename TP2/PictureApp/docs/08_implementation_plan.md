@@ -10,7 +10,7 @@ Step 3
 Implement API service to fetch images.
 
 Step 4
-Create image grid.
+Create RecyclerView for grid.
 
 Step 5
 Design activity_main.xml layout.
