@@ -17,3 +17,11 @@ Prompt: Considering the data model in the 02_data_model.md file, implement step 
 Result: ImageItem and BreedInformation classes implemented, with the data model related information as parameters.
 
 ---
+
+## Prompt 3
+
+Goal: Implementing the API service to fetch images from The Cat API.
+
+Prompt: Using infotmation from 07_api_usage.md, implement step 3 - the API service needed to get picture and cat breed information from The Cat API.
+
+Result: API service and access to The Cat API implemented, with a starting limit of 30 images per fetch.
