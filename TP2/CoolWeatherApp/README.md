@@ -11,8 +11,8 @@ Repository URL: [Repository](https://github.com/z1lyb/Desenvolvimento-de-Aplicac
 
 ## 1. Introduction
 O presente repositório foi criado no âmbito da disciplina de Desenvolvimento de Aplicações Móveis, durante a realização 
-do segundo tutorial da disciplina. Este relatório consistirá na descrição do trabalho referente à _**Section 1 - Kotlin Exercises**_.  
-Durante a sua realização, são consolidados mais conceitos da linguagem Kotlin, como _extension functions_, _generics_ e composição de funções.
+do segundo tutorial da disciplina. Este relatório consistirá na descrição do trabalho referente à _**Section 2: Android - The Cool Weather App**_.  
+
 ## 2. System Overview
 
 ## 3. Architecture and Design
