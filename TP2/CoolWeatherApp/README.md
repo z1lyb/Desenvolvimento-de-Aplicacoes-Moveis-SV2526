@@ -12,10 +12,13 @@ Repository URL: [Repository](https://github.com/z1lyb/Desenvolvimento-de-Aplicac
 ## 1. Introduction
 O presente repositório foi criado no âmbito da disciplina de Desenvolvimento de Aplicações Móveis, durante a realização 
 do segundo tutorial da disciplina. Este relatório consistirá na descrição do trabalho referente à _**Section 2: Android - The Cool Weather App**_.  
-
+<!-- Purpose of the assignment, problem description, and objectives. -->
 ## 2. System Overview
+<!-- High-level description of the solution, main features, and use cases. -->
 
 ## 3. Architecture and Design
+<!-- Architecture, folder structure, design patterns, and justification of key
+decisions. -->
 
 
 ## 4. Implementation
