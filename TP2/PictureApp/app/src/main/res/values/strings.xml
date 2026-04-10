@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="app_name">CatMap</string>
+    <string name="title_detail">Breed Details</string>
+    <string name="refresh">Refresh</string>
+    <string name="search">Search</string>
+    <string name="cat_image">Cat image</string>
+    <string name="breed_name_placeholder">Breed Name</string>
+    <string name="origin_placeholder">Origin: —</string>
+    <string name="life_span_placeholder">Life Span: —</string>
+    <string name="weight_placeholder">Weight: —</string>
+    <string name="temperament_placeholder">Temperament: —</string>
+    <string name="open_wikipedia">Open Wikipedia</string>
+    <string name="error_loading">Failed to load images. Please try again.</string>
+    <string name="search_hint">Search by breed…</string>
+    <string name="label_origin">Origin: %1$s</string>
+    <string name="label_life_span">Life span: %1$s years</string>
+    <string name="label_weight">Weight: %1$s kg</string>
+    <string name="label_temperament">Temperament: %1$s</string>
+</resources>
