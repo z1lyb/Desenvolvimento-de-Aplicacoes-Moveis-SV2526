@@ -1,4 +1,4 @@
-# Assignment 2 - Weather App 
+# Assignment 2 - Weather App
 
 Course: Desenvolvimento de Aplicações Móveis  
 Student(s): Zilda Biai (51606)  
@@ -10,6 +10,7 @@ Repository URL: [Repository](https://github.com/z1lyb/Desenvolvimento-de-Aplicac
 # Tutorial 2 - Kotlin Exercises
 
 ## 1. Introduction
+
 O presente repositório foi criado no âmbito da disciplina de Desenvolvimento de Aplicações Móveis, durante a realização 
 do segundo tutorial da disciplina. Este relatório consistirá na descrição do trabalho referente à _**Section 2: Android - The Cool Weather App**_.  
 O propósito desta secção é de desenvolver uma aplicação que apresente informações relativas à meteorologia de um determinado local, aplicando o uso e acesso a APIs externos.
@@ -20,7 +21,6 @@ O propósito desta secção é de desenvolver uma aplicação que apresente info
 ## 3. Architecture and Design
 <!-- Architecture, folder structure, design patterns, and justification of key
 decisions. -->
-
 
 ## 4. Implementation
 <!-- Implementation details: main modules, components, algorithms, and relevant code
