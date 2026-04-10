@@ -49,14 +49,25 @@ class MainActivity : AppCompatActivity() {
         }
     }
 
+    override fun onResume() {
+        super.onResume()
+        // Refresh favorites in case user toggled them on the Favorites screen
+        viewModel.refreshFavorites()
+    }
+
     private fun setupRecyclerView() {
-        // Initialize adapter with a click listener that navigates to the detail screen
-        imageAdapter = ImageAdapter { clickedImage ->
-            val intent = android.content.Intent(this, com.example.catmap.ui.detail.DetailActivity::class.java).apply {
-                putExtra("EXTRA_IMAGE_JSON", com.google.gson.Gson().toJson(clickedImage))
+        // Initialize adapter with listeners for details and favorites
+        imageAdapter = ImageAdapter(
+            onItemClick = { clickedImage ->
+                val intent = android.content.Intent(this, com.example.catmap.ui.detail.DetailActivity::class.java).apply {
+                    putExtra("EXTRA_IMAGE_JSON", com.google.gson.Gson().toJson(clickedImage))
+                }
+                startActivity(intent)
+            },
+            onFavoriteClick = { item ->
+                viewModel.toggleFavorite(item)
             }
-            startActivity(intent)
-        }
+        )
 
         // Setup RecyclerView with GridLayoutManager (e.g., 2 columns visually appealing)
         binding.recyclerView.apply {
@@ -70,9 +81,12 @@ class MainActivity : AppCompatActivity() {
         viewModel.images.observe(this) { imagesList ->
             if (imagesList != null && imagesList.isNotEmpty()) {
                 imageAdapter.setImages(imagesList)
-                // We only explicitly show the recycler view if not loading and no error
-                // The loading state observer mainly handles the visibility toggles
             }
+        }
+
+        // Observe favorite IDs to update heart icons in the grid
+        viewModel.favoriteIds.observe(this) { ids ->
+            imageAdapter.setFavorites(ids)
         }
 
         // Observe loading state to toggle visible views
@@ -83,8 +97,6 @@ class MainActivity : AppCompatActivity() {
                 binding.layoutError.visibility = View.GONE
             } else {
                 binding.progressBar.visibility = View.GONE
-                // If there's an error, the error observer will handle visibility.
-                // Otherwise, show the recycler view. We could check images list size here to be safer.
                 if (viewModel.errorMessage.value == null) {
                     binding.recyclerView.visibility = View.VISIBLE
                 }
@@ -97,7 +109,6 @@ class MainActivity : AppCompatActivity() {
                 binding.layoutError.visibility = View.VISIBLE
                 binding.textErrorMessage.text = errorMsg
                 binding.recyclerView.visibility = View.GONE
-                // ProgressBar is handled by isLoading
             } else {
                 binding.layoutError.visibility = View.GONE
             }
@@ -106,6 +117,16 @@ class MainActivity : AppCompatActivity() {
         // Observe loading progress for the linear indicator
         viewModel.loadingProgress.observe(this) { progress ->
             binding.progressBar.setProgress(progress, true)
+        }
+    }
+
+    override fun onOptionsItemSelected(item: android.view.MenuItem): Boolean {
+        return when (item.itemId) {
+            com.example.catmap.R.id.action_favorites -> {
+                startActivity(android.content.Intent(this, com.example.catmap.ui.favorites.FavoritesActivity::class.java))
+                true
+            }
+            else -> super.onOptionsItemSelected(item)
         }
     }
 

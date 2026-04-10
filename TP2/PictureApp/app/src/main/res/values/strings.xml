@@ -18,4 +18,6 @@
     <string name="label_life_span">Life span: %1$s years</string>
     <string name="label_weight">Weight: %1$s</string>
     <string name="label_temperament">Temperament: %1$s</string>
+    <string name="favorite">Favorite</string>
+    <string name="favorites_title">Favorites</string>
 </resources>

@@ -10,11 +10,28 @@
     app:strokeColor="@color/card_stroke"
     app:strokeWidth="1dp">
 
-    <ImageView
-        android:id="@+id/imageViewItem"
+    <FrameLayout
         android:layout_width="match_parent"
-        android:layout_height="150dp"
-        android:contentDescription="@string/cat_image"
-        android:scaleType="centerCrop" />
+        android:layout_height="wrap_content">
 
+        <ImageView
+            android:id="@+id/imageViewItem"
+            android:layout_width="match_parent"
+            android:layout_height="150dp"
+            android:contentDescription="@string/cat_image"
+            android:scaleType="centerCrop" />
+
+        <ImageButton
+            android:id="@+id/buttonFavorite"
+            android:layout_width="40dp"
+            android:layout_height="40dp"
+            android:layout_gravity="top|end"
+            android:layout_margin="8dp"
+            android:background="?attr/selectableItemBackgroundBorderless"
+            android:contentDescription="@string/favorite"
+            android:scaleType="fitCenter"
+            app:srcCompat="@drawable/ic_favorite_border"
+            app:tint="@color/white" />
+
+    </FrameLayout>
 </com.google.android.material.card.MaterialCardView>

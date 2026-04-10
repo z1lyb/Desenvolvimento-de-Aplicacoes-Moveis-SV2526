@@ -12,4 +12,5 @@
     <color name="on_surface">#1C1B1F</color>
     <color name="text_secondary">#6B6B6B</color>
     <color name="card_stroke">#E0D8D0</color>
+    <color name="heart_red">#E91E63</color>
 </resources>

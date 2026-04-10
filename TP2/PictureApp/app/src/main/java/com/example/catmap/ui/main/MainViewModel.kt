@@ -1,22 +1,26 @@
 package com.example.catmap.ui.main
 
+import android.app.Application
+import androidx.lifecycle.AndroidViewModel
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
-import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.example.catmap.model.ImageItem
 import com.example.catmap.model.Resource
+import com.example.catmap.repository.FavoritesRepository
 import com.example.catmap.repository.ImageRepository
+import kotlinx.coroutines.flow.collect
 import kotlinx.coroutines.launch
 
 /**
  * ViewModel for [MainActivity].
- * Holds the list of images and loading/error state.
- * Uses [ImageRepository] to fetch data from The Cat API.
+ * Holds the list of images, loading/error state, and favorite statuses.
+ * Uses [ImageRepository] for network data and [FavoritesRepository] for persistence.
  */
-class MainViewModel : ViewModel() {
+class MainViewModel(application: Application) : AndroidViewModel(application) {
 
     private val repository = ImageRepository()
+    private val favoritesRepository = FavoritesRepository(application)
 
     private val _images = MutableLiveData<List<ImageItem>>(emptyList())
     /** Observed by [MainActivity] to update the RecyclerView. */
@@ -34,9 +38,30 @@ class MainViewModel : ViewModel() {
     /** Observed by [MainActivity] to display error messages. */
     val errorMessage: LiveData<String?> = _errorMessage
 
+    private val _favoriteIds = MutableLiveData<Set<String>>(emptySet())
+    /** Observed by [MainActivity] to update heart icons in the grid. */
+    val favoriteIds: LiveData<Set<String>> = _favoriteIds
+
     init {
+        // Load favorites from local storage initially
+        refreshFavorites()
         // Fetch images initially when the ViewModel is created
         fetchImages()
+    }
+
+    /**
+     * Toggles the favorite status of an image and updates the UI state.
+     */
+    fun toggleFavorite(item: ImageItem) {
+        favoritesRepository.toggleFavorite(item)
+        refreshFavorites()
+    }
+
+    /**
+     * Refreshes the local list of favorite IDs to sync with storage.
+     */
+    fun refreshFavorites() {
+        _favoriteIds.value = favoritesRepository.getFavorites().map { it.id }.toSet()
     }
 
     /**

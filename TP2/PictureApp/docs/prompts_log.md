@@ -118,3 +118,17 @@ Goal: Implementing a loading progress bar for the app
 Prompt: According to the 09_extensions.md file, implement step 13 - loading progress bar for the app, to be presented while images are loading or refreshing. The progress bar should represent how far along the process of fetching images the application is.
 
 Result: Instead of a loading circle, a linear progress bar is shown at the top of the screen while images are loading or refreshing. It shows the progress of fetching images as a percentage.
+
+---
+
+## Prompt 13
+
+Goal: Implementing the ability for a user to select up to five favourite pictures, and a button to view them.
+
+Prompt: Referring to the 09_extensions.md file, implement step 14 - allow users to select up to five favourite pictures, stored in a FIFO manner, and a button where they can view them.
+
+Result: A heart utton on pictures that selects them as a favourite. If a sixth is selected, the first is unselected. Also added a button where they can view them.
+
+---
+
+## Prompt 14

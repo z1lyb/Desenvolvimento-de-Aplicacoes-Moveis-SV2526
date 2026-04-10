@@ -25,11 +25,15 @@ import com.example.catmap.model.ImageItem
  * @param onItemClick Called with the tapped [ImageItem] when a grid cell is pressed.
  */
 class ImageAdapter(
-    private val onItemClick: (ImageItem) -> Unit
+    private val onItemClick: (ImageItem) -> Unit,
+    private val onFavoriteClick: (ImageItem) -> Unit
 ) : ListAdapter<ImageItem, ImageAdapter.ImageViewHolder>(DiffCallback) {
 
     /** Full unfiltered list – kept so [filter] can restore items after clearing the query. */
     private var fullList: List<ImageItem> = emptyList()
+
+    /** Set of image IDs currently marked as favorites. */
+    private var favoriteIds: Set<String> = emptySet()
 
     // ── ListAdapter overrides ────────────────────────────────────────────────
 
@@ -41,10 +45,21 @@ class ImageAdapter(
     }
 
     override fun onBindViewHolder(holder: ImageViewHolder, position: Int) {
-        holder.bind(getItem(position))
+        holder.bind(getItem(position), favoriteIds.contains(getItem(position).id))
     }
 
     // ── Public API ───────────────────────────────────────────────────────────
+
+    /**
+     * Updates the set of favorite image IDs and refreshes the displayed heart icons.
+     *
+     * @param ids New set of favorited image IDs.
+     */
+    fun setFavorites(ids: Set<String>) {
+        favoriteIds = ids
+        // Full refresh to update heart icons across all visible items
+        notifyDataSetChanged()
+    }
 
     /**
      * Replaces the dataset and resets any active filter.
@@ -88,8 +103,15 @@ class ImageAdapter(
         init {
             binding.root.setOnClickListener {
                 val position = bindingAdapterPosition
-                if (position != RecyclerView.NO_ID.toInt()) {
+                if (position != RecyclerView.NO_POSITION) {
                     onItemClick(getItem(position))
+                }
+            }
+
+            binding.buttonFavorite.setOnClickListener {
+                val position = bindingAdapterPosition
+                if (position != RecyclerView.NO_POSITION) {
+                    onFavoriteClick(getItem(position))
                 }
             }
         }
@@ -97,8 +119,9 @@ class ImageAdapter(
         /**
          * Loads the image URL into [ItemImageBinding.imageViewItem] using Glide.
          * Shows a colour placeholder while loading and cross-fades when complete.
+         * Sets the heart icon based on [isFavorite].
          */
-        fun bind(item: ImageItem) {
+        fun bind(item: ImageItem, isFavorite: Boolean) {
             Glide.with(binding.imageViewItem.context)
                 .load(item.url)
                 .placeholder(R.color.card_stroke)   // subtle grey while loading
@@ -106,6 +129,19 @@ class ImageAdapter(
                 .transition(DrawableTransitionOptions.withCrossFade())
                 .centerCrop()
                 .into(binding.imageViewItem)
+
+            // Update favorite icon state
+            if (isFavorite) {
+                binding.buttonFavorite.setImageResource(R.drawable.ic_favorite)
+                binding.buttonFavorite.drawable.setTint(
+                    binding.root.context.getColor(R.color.heart_red)
+                )
+            } else {
+                binding.buttonFavorite.setImageResource(R.drawable.ic_favorite_border)
+                binding.buttonFavorite.drawable.setTint(
+                    binding.root.context.getColor(R.color.white)
+                )
+            }
         }
     }
 
