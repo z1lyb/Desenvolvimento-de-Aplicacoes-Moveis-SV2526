@@ -19,13 +19,13 @@ Step 6
 Connect ViewModel to API repository.
 
 Step 7
-Display images in grid.
+Display images in grid, connecting ViewModel to MainActivity.
 
 Step 8
-Add refresh button functionality.
+Create image detail screen layout and navigation.
 
 Step 9
-Add wikipedia accesss button functionality
+Add refresh and wikipedia accesss button functionality
 
 Step 10
-Add search functionality
+Add search by breed functionality

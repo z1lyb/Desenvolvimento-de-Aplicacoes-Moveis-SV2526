@@ -38,9 +38,27 @@ Result: Created the ImageAdapter class, with the necessary methods to display th
 
 --
 
-## 
+## Prompt 5
+
+Goal: Creating XML layout for the main screen.
+
+Prompt: Referring to the screens file in the docs folder, implement step 5 in the 08_implementation_plan.md file - Design activity_main.xml layout for the main screen. Create it with the indicated visual features.
+
+Result: Created main menu layout with the indicated visual features, including loading and error states.
+
+---
+
+## Prompt 6
+
+Goal
+
+---
 ##
+
+---
 ##
+
+---
 ##
-##
+---
 ##
