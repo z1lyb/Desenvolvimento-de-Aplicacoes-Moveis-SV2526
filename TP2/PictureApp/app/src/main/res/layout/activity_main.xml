@@ -22,11 +22,12 @@
         android:background="@color/primary"
         app:elevation="4dp">
 
-        <androidx.appcompat.widget.Toolbar
+        <com.google.android.material.appbar.MaterialToolbar
             android:id="@+id/toolbar"
             android:layout_width="match_parent"
             android:layout_height="?attr/actionBarSize"
-            app:theme="@style/Theme.CatMap.Toolbar"
+            app:titleCentered="true"
+            style="@style/Theme.CatMap.Toolbar"
             app:title="@string/app_name"
             app:titleTextAppearance="@style/TextAppearance.CatMap.ToolbarTitle" />
 

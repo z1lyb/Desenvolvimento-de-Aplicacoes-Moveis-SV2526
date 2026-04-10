@@ -31,6 +31,9 @@ class MainActivity : AppCompatActivity() {
 
         // Set up Toolbar as the ActionBar
         setSupportActionBar(binding.toolbar)
+        supportActionBar?.setDisplayShowHomeEnabled(true)
+        supportActionBar?.setLogo(com.example.catmap.R.drawable.cat_icon)
+        supportActionBar?.setDisplayUseLogoEnabled(true)
 
         setupRecyclerView()
         setupObservers()

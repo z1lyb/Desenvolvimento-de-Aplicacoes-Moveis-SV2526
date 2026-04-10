@@ -90,3 +90,11 @@ Prompt: According to step 10 and all the files needed, implement the "search by 
 Result: Users can now access an interactive search bar in the main screen, allowing them to search by breed of the cats in the images.
 
 ---
+
+## Prompt 10
+
+Goal: Set an app icon and name in toolbar
+
+Prompt: Set the app icon using the resource @drawable/app_icon which I have placed in the drawable folder, first generating a Vector Asset based on it. Use it as an icon as well as show it in the app toolbar, before the app name.
+
+Result: App icon set and shown in the toolbar before the app name.
