@@ -33,11 +33,31 @@ class DetailActivity : AppCompatActivity() {
         setSupportActionBar(binding.toolbar)
         supportActionBar?.setDisplayHomeAsUpEnabled(true)
 
-        // Observe selected image – population logic added in Step 6
+        val imageJson = intent.getStringExtra("EXTRA_IMAGE_JSON")
+        if (imageJson != null) {
+            val image = com.google.gson.Gson().fromJson(imageJson, com.example.catmap.model.ImageItem::class.java)
+            viewModel.setImage(image)
+        }
+
+        // Observe selected image and populate the UI
         viewModel.selectedImage.observe(this) { image ->
             image ?: return@observe
-            binding.textBreedName.text = image.breed?.name ?: ""
-            // Further field binding added in Step 6
+            
+            // Populate breed info fields
+            binding.textBreedName.text = image.breed?.name ?: "Unknown Breed"
+            binding.textOrigin.text = getString(com.example.catmap.R.string.label_origin, image.breed?.origin ?: "Unknown")
+            binding.textLifeSpan.text = getString(com.example.catmap.R.string.label_life_span, image.breed?.lifeSpan ?: "?")
+            binding.textWeight.text = getString(com.example.catmap.R.string.label_weight, image.breed?.weight?.takeIf { it.isNotBlank() } ?: "?")
+            binding.textTemperament.text = getString(com.example.catmap.R.string.label_temperament, image.breed?.temperament ?: "Unknown")
+            
+            // Load large image with Glide
+            com.bumptech.glide.Glide.with(this)
+                .load(image.url)
+                .placeholder(com.example.catmap.R.color.card_stroke)
+                .error(android.R.drawable.ic_menu_gallery)
+                .transition(com.bumptech.glide.load.resource.drawable.DrawableTransitionOptions.withCrossFade())
+                .centerCrop()
+                .into(binding.imageViewDetail)
         }
 
         // Wikipedia button – full implementation in Step 9

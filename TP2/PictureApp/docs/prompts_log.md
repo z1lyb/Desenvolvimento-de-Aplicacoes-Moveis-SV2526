@@ -65,17 +65,17 @@ Result: MainActivity fully connected to the view model, so it can display pictur
 
 Goal: Creation of the image detail screen
 
-Prompt: 
+Prompt: Create the image detail screen as described in 03_screens.md, including the navigation described in 05_navigation.md.
 
-Result: 
+Result: If the user taps an image in the main grid, they are navigated to the image detail screen, where they can see the image and cat breed information.
 
 ---
 
 ## Prompt 8
 
-Goal: 
+Goal: Implementing refresh and wikipedia access functionalities.
 
-Prompt: 
+Prompt: According to step 9 and all the files needed, implement the grid refresh and wikipedia access from a cat breed's page functionalities.
 
 Result: 
 

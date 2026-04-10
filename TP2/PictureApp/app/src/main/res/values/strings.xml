@@ -16,6 +16,6 @@
     <string name="search_hint">Search by breed…</string>
     <string name="label_origin">Origin: %1$s</string>
     <string name="label_life_span">Life span: %1$s years</string>
-    <string name="label_weight">Weight: %1$s kg</string>
+    <string name="label_weight">Weight: %1$s</string>
     <string name="label_temperament">Temperament: %1$s</string>
 </resources>

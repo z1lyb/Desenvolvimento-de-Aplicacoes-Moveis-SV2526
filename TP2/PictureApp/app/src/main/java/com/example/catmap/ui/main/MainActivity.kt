@@ -47,9 +47,12 @@ class MainActivity : AppCompatActivity() {
     }
 
     private fun setupRecyclerView() {
-        // Initialize adapter with an empty click listener for now (Step 8 will add navigation)
+        // Initialize adapter with a click listener that navigates to the detail screen
         imageAdapter = ImageAdapter { clickedImage ->
-            // TODO: Navigate to detail screen in Step 8
+            val intent = android.content.Intent(this, com.example.catmap.ui.detail.DetailActivity::class.java).apply {
+                putExtra("EXTRA_IMAGE_JSON", com.google.gson.Gson().toJson(clickedImage))
+            }
+            startActivity(intent)
         }
 
         // Setup RecyclerView with GridLayoutManager (e.g., 2 columns visually appealing)
