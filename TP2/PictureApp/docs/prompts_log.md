@@ -50,15 +50,50 @@ Result: Created main menu layout with the indicated visual features, including l
 
 ## Prompt 6
 
-Goal
+Goal: Connecting the view model to the main activity, allowing for pictures to be displayed.
+
+Prompt: Remembering and inspecting the files in /docs, implement step 6 and connect ViewModel and MainActivity.
+
+Result: MainActivity fully connected to the view model and API, displaying pictures.
 
 ---
-##
+
+## Prompt 7
+
+Goal: 
+
+Prompt: 
+
+Result: 
 
 ---
-##
+
+## Prompt 8
+
+Goal: 
+
+Prompt: 
+
+Result: 
 
 ---
-##
+
+## Prompt 9
+
+Goal: 
+
+Prompt: 
+
+Result: 
+
 ---
-##
+
+## Prompt 10
+
+Goal:
+
+Prompt:
+
+Result:
+
+---
