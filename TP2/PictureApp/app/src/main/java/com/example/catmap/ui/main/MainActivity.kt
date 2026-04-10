@@ -40,9 +40,9 @@ class MainActivity : AppCompatActivity() {
             viewModel.fetchImages()
         }
 
-        // FAB refresh – logic wired in Step 8
+        // FAB refresh – logic wired in Step 9
         binding.fabRefresh.setOnClickListener {
-            // TODO: trigger image refresh in Step 8
+            viewModel.fetchImages()
         }
     }
 

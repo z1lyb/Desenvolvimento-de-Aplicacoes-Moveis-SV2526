@@ -77,7 +77,7 @@ Goal: Implementing refresh and wikipedia access functionalities.
 
 Prompt: According to step 9 and all the files needed, implement the grid refresh and wikipedia access from a cat breed's page functionalities.
 
-Result: 
+Result: A user can now refresh the main page by pressing a button, as well as open a cat breed's wikipedia page from the detail screen.
 
 ---
 
