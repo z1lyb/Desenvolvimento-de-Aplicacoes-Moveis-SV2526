@@ -4,7 +4,7 @@ Step 1
 Create Android project with Kotlin and XML Views.
 
 Step 2
-Create data model class ImageItem.
+Create data model classes ImageItem and BreedInformation.
 
 Step 3
 Implement API service to fetch images.
