@@ -83,10 +83,10 @@ Result: A user can now refresh the main page by pressing a button, as well as op
 
 ## Prompt 9
 
-Goal:
+Goal: Implementing search by breed functionality.
 
-Prompt:
+Prompt: According to step 10 and all the files needed, implement the "search by breed of the cats in the images" functionality.
 
-Result:
+Result: Users can now access an interactive search bar in the main screen, allowing them to search by breed of the cats in the images.
 
 ---

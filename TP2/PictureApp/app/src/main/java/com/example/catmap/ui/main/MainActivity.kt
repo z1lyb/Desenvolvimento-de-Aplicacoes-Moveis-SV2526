@@ -100,4 +100,26 @@ class MainActivity : AppCompatActivity() {
             }
         }
     }
+
+    override fun onCreateOptionsMenu(menu: android.view.Menu): Boolean {
+        menuInflater.inflate(com.example.catmap.R.menu.menu_main, menu)
+
+        val searchItem = menu.findItem(com.example.catmap.R.id.action_search)
+        val searchView = searchItem.actionView as androidx.appcompat.widget.SearchView
+        searchView.queryHint = getString(com.example.catmap.R.string.search_hint)
+
+        searchView.setOnQueryTextListener(object : androidx.appcompat.widget.SearchView.OnQueryTextListener {
+            override fun onQueryTextSubmit(query: String?): Boolean {
+                searchView.clearFocus()
+                return true
+            }
+
+            override fun onQueryTextChange(newText: String?): Boolean {
+                imageAdapter.filter(newText ?: "")
+                return true
+            }
+        })
+
+        return super.onCreateOptionsMenu(menu)
+    }
 }
