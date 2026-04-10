@@ -19,10 +19,10 @@ class ImageRepository {
     /**
      * Fetches up to [limit] cat images that have breed information attached.
      *
-     * @param limit Number of images to retrieve (default 30).
+     * @param limit Number of images to retrieve (default 100).
      * @return [Resource.Success] with a list of [ImageItem], or [Resource.Error] on failure.
      */
-    suspend fun getImages(limit: Int = 30): Resource<List<ImageItem>> {
+    suspend fun getImages(limit: Int = 100): Resource<List<ImageItem>> {
         return try {
             val images = apiService.searchImages(
                 apiKey = RetrofitClient.API_KEY,

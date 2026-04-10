@@ -30,7 +30,7 @@ interface ApiService {
     @GET("images/search")
     suspend fun searchImages(
         @Query("api_key") apiKey: String,
-        @Query("limit") limit: Int = 30,
+        @Query("limit") limit: Int = 100,
         @Query("has_breeds") hasBreeds: Int = 1
     ): List<ImageItem>
 

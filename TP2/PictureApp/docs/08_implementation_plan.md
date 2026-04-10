@@ -29,3 +29,9 @@ Add refresh and wikipedia accesss button functionality
 
 Step 10
 Add search by breed functionality
+
+Step 11
+Create and set an app icon
+
+Step 12
+Implement dark mode
