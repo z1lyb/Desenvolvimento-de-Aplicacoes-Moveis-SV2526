@@ -1,4 +1,4 @@
-# Assignment 2 - Weather App 
+# Assignment 2 - Weather App
 
 Course: Desenvolvimento de Aplicações Móveis  
 Student(s): Zilda Biai (51606)  
