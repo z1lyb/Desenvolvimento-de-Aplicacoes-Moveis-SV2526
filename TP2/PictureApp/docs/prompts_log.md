@@ -127,8 +127,4 @@ Goal: Implementing the ability for a user to select up to five favourite picture
 
 Prompt: Referring to the 09_extensions.md file, implement step 14 - allow users to select up to five favourite pictures, stored in a FIFO manner, and a button where they can view them.
 
-Result: A heart utton on pictures that selects them as a favourite. If a sixth is selected, the first is unselected. Also added a button where they can view them.
-
----
-
-## Prompt 14
+Result: A heart button on pictures that selects them as a favourite. If a sixth is selected, the first is unselected. Also added a button where they can view them.
