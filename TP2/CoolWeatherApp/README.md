@@ -3,7 +3,7 @@
 Course: Desenvolvimento de Aplicações Móveis  
 Student(s): Zilda Biai (51606)  
 Date: 12/04/2026  
-Repository URL: [Repository](https://github.com/z1lyb/Desenvolvimento-de-Aplicacoes-Moveis-SV2526/tree/main/TP2/DAM_TP2)
+Repository URL: [Cool Weather App](https://github.com/z1lyb/Desenvolvimento-de-Aplicacoes-Moveis-SV2526/tree/main/TP2/CoolWeatherApp)
 
 ---
 

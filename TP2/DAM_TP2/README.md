@@ -3,7 +3,7 @@
 Course: Desenvolvimento de Aplicações Móveis  
 Student(s): Zilda Biai (51606)  
 Date: 12/04/2026  
-Repository URL: [Repository](https://github.com/z1lyb/Desenvolvimento-de-Aplicacoes-Moveis-SV2526/tree/main/TP2/DAM_TP2)
+Repository URL: [DAM_TP2](https://github.com/z1lyb/Desenvolvimento-de-Aplicacoes-Moveis-SV2526/tree/main/TP2/DAM_TP2)
 
 ---
 
@@ -11,7 +11,7 @@ Repository URL: [Repository](https://github.com/z1lyb/Desenvolvimento-de-Aplicac
 
 ## 1. Introduction
 O presente repositório foi criado no âmbito da disciplina de Desenvolvimento de Aplicações Móveis, durante a realização 
-do segundo tutorial da disciplina. Este relatório consistirá na descrição do trabalho referente à _**Section 1 - Kotlin Exercises**_.  
+do segundo tutorial da disciplina. Este relatório consistirá na descrição do trabalho referente à _**Section 1: Kotlin Exercises**_.  
 Durante a sua realização, são consolidados mais conceitos da linguagem Kotlin, como _extension functions_, _generics_ e composição de funções.
 ## 2. System Overview
 O sistema desenvolvido é composto pela resolução dos quatro exercícios:
