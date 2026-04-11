@@ -36,7 +36,7 @@ class Pipeline {
      */
     fun describe() {
         for (step in stepNames) println("\t ${stepNames.indexOf(step) + 1}.  $step")
-        }
+    }
 
     /**
      * Composes two functions.

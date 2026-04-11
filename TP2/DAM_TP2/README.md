@@ -13,6 +13,7 @@ Repository URL: [DAM_TP2](https://github.com/z1lyb/Desenvolvimento-de-Aplicacoes
 O presente repositório foi criado no âmbito da disciplina de Desenvolvimento de Aplicações Móveis, durante a realização 
 do segundo tutorial da disciplina. Este relatório consistirá na descrição do trabalho referente à _**Section 1: Kotlin Exercises**_.  
 Durante a sua realização, são consolidados mais conceitos da linguagem Kotlin, como _extension functions_, _generics_ e composição de funções.
+
 ## 2. System Overview
 O sistema desenvolvido é composto pela resolução dos quatro exercícios:
 1. Event Log Processing  
@@ -21,13 +22,14 @@ o desenvolvimento de uma classe que processa eventos por meio de funções.
 2. Memory Cache  
     Criação de uma cache de memória, consolidando os conceitos de _generics_ e funções com parâmetros de tipo.
 3. Configurable Data Pipeline  
-    Criação de uma _pipeline_ de processamento de dados configurável, utilizando _lambdas_ e composição de funções para 
+    Criação de um _pipeline_ de processamento de dados configurável, utilizando _lambdas_ e composição de funções para 
 usar uma sequência de passos configuráveis para alterar uma sequência de strings.
 4. 2D Vector Library  
     Implementação de uma classe representativa de um vetor 2D e as operações a si associadas, de modo a usar o conceito de 
 _operator overloading_.  
 
 Todas as classes criadas são testadas com dados fornecidos com esse objetivo.
+
 ## 3. Architecture and Design
 O projeto está organizado por _packages_, situadas dentro do _package_ raiz dam e separadas por exercício. A arquitetura segue a seguinte estrutura:
 * dam
@@ -65,59 +67,62 @@ Neste exercício, é criada a classe genérica Cache, que mapeia chaves a valore
 * **filterValues** - filtra os valores por uma condição
 
 ### Exercise 3 - Configurable Data Pipeline
-Implementação de um _pipeline_ que guarda um conjunto de transformações e as aplica a uma lista de Strings.  
+Implementação e teste de um _pipeline_ que guarda um conjunto de transformações e as aplica a uma lista de Strings.  
 É composta por:
 * **addStage** - adiciona um passo e o seu nome ao _pipeline_.
-* **execute**
-* **describe**
-* **then**
-* **compose**
+* **execute** - executa todos os passos do _pipeline_ e retorna o seu resultado.
+* **describe** - descreve o _pipeline_, indicando todos os seus passos.
+* **then** - função criada para a composição de duas funções. Executa ambas em sequência.
+* **compose** - recebe dois passos do _pipeline_ e junta-os, recorrendo à função anterior e voltando a colocar a transformação resultante no local devido da lista de passos.
 
+São definidas também as _higher-order functions_ seguintes:
+* **buildPipeline** - constrói um _pipeline_ ao lhe aplicar as funções inseridas como parâmetro.
+* **fork** - executa duas pipelines paralelamente com o mesmo input, retornando um Pair com os seus resultados.
 
 ### Exercise 4 - 2D Vector Library
+Criação e teste de uma classe representativa de um vetor 2D, para a implementação do _overload_ de operadores.
+Os operadores **plus**, **minus**, **times**, **unaryMinus** e **compareTo** foram _overloaded_ para realizar, respetivamente, 
+adição, subtração, multiplicação escalar, inversão e comparação.
+As seguintes funções específicas a vetores foram criadas:
+* **magnitude** - calcula e retorna a magnitude do vetor.
+* **dot** - calcula o produto interno de dois vetores.
+* **normalized** - normaliza um vetor. Em caso de ser um vetor zero, lança um **IllegalStateException** para evitar a divisão por zero.
+Criou-se também um operador **times**, adicionado como _extension function_ a valores do tipo Double, para permitir a multiplicação escalar _left-hand_. 
+Foi implementado suporte a _destructuring declarations_ ao definir a classe como data class, sendo automaticamente definido o suporte à separação da classe nos componentes **x** e **y**.
 
-<!-- Implementation details: main modules, components, algorithms, and relevant code
-excerpts. -->
 ## 5. Testing and Validation
-<!-- Testing strategy, test cases, scenarios, edge cases, and known limitations. -->
+Cada componente implementado foi testado através da função **main**, utilizando os dados de teste fornecidos no enunciado
+do tutorial. Os testes foram todos verificados com os resultados esperados.
+
 ## 6. Usage Instructions
-<!-- How to run the project: requirements, setup, configuration, and execution steps. -->
+Para executar o projeto:
+1.  Instalar IntelliJ IDEA
+2.  Criar um projeto Kotlin
+3.  Adicionar os ficheiros .kt presentes
+4.  Executar cada ficheiro com a função main
 
 ---
 
-# Autonomous Software Engineering Sections - only for [AC OK, AI OK] sections
-
-## 7. Prompting Strategy
-<!-- Describe the prompts used with AI tools, their purpose, and how they evolved.
-Include representative examples. -->
-## 8. Autonomous Agent Workflow
-<!-- Explain how AI tools or agents contributed to development: planning, coding,
-debugging, testing, documentation, etc. -->
-## 9. Verification of AI-Generated Artifacts
-<!-- Describe how you verified correctness of AI-generated code/designs (testing,
-manual review, static analysis, etc.). -->
-## 10. Human vs AI Contribution
-<!-- Clearly state which parts were primarily human-developed and which were
-AI-assisted. -->
-## 11. Ethical and Responsible Use
-<!-- Reflect on risks, limitations, biases, or inappropriate outputs from AI tools
-and how they were handled. -->
+## Autonomous Software Engineering Sections - only for [AC OK, AI OK] sections
+Não foi utilizada inteligência artificial na implementação deste repositório. 
+Toda a programação foi desenvolvida autonomamente, com consulta à documentação oficial de Kotlin, assim como os _websites_
+_GeeksforGeeks_ e _StackOverflow_.
+O relatório presente também foi inteiramente desenvolvido por mim.
 
 ---
 
 # Development Process
 
 ## 12. Version Control and Commit History
-<!-- Describe how version control was used. The commit history must reflect
-continuous work (not only final commits). -->
+O trabalho foi mantido em repositório Git local, assim como remoto no GitHub. Os commits realizados 
+foram incrementais, refletindo a evolução do projeto e não apenas a sua finalização.
+
 ## 13. Difficulties and Lessons Learned
-<!-- Main challenges, mistakes, insights, and skills acquired during the assignment.
--->
-## 14. Future Improvements
-<!-- Possible extensions, optimizations, or features that could be added in future work. -->
+A principal dificuldade na implementação dos exercícios pedidos deu-se na composição de funções, sendo ultrapassada com 
+a revisão da documentação da linguagem.
 
 ---
 
 ## 15. AI Usage Disclosure (Mandatory)
-<!-- List all AI tools used (e.g., ChatGPT, Copilot, etc.), how they were used, and
-confirmation that you remain responsible for all content. -->
+Não foi utilizada inteligência artificial na implementação deste repositório. 
+Sou responsável por todo o conteúdo incluído nos ficheiros. 
