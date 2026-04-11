@@ -20,18 +20,31 @@ aplicando o uso e acesso a APIs externos.
 A aplicação final desenvolvida consiste numa interface Android que mostra o estado de tempo numa 
 determinada localização, customizável pelo utilizador a partir da sua latitude e longitude, predeterminadas para as de Lisboa.
 A informação apresentada sobre a localização é:
-<!-- High-level description of the solution, main features, and use cases. -->
+* Temperatura
+* Pressão marítima
+* Direção do vento
+* Velocidade do vento
+* Hora  
+
+A imagem de fundo da aplicação é de dia ou noite com base na hora de nascer e pôr do sol da localização 
+correspondente, assim como a aplicação conta com um modo claro e escuro, dependendo da selecionada no dispositivo. 
 
 ## 3. Architecture and Design
+
 <!-- Architecture, folder structure, design patterns, and justification of key
 decisions. -->
 
 ## 4. Implementation
+
 <!-- Implementation details: main modules, components, algorithms, and relevant code
 excerpts. -->
+
 ## 5. Testing and Validation
+
 <!-- Testing strategy, test cases, scenarios, edge cases, and known limitations. -->
+
 ## 6. Usage Instructions
+
 <!-- How to run the project: requirements, setup, configuration, and execution steps. -->
 
 ---
