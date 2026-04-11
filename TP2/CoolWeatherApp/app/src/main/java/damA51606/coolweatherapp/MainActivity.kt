@@ -50,8 +50,8 @@ class MainActivity : AppCompatActivity() {
         fetchWeatherData(lat.toFloat(), long.toFloat()).start()
 
         btn.setOnClickListener {
-            lat = latitude.text.toString()
-            long = longitude.text.toString()
+            if (latitude.text != null && latitude.text.toString() != "") lat = latitude.text.toString() else lat = "38.76"
+            if (longitude.text != null && longitude.text.toString() != "") long = longitude.text.toString() else long = "-9.12"
             fetchWeatherData(lat.trim().toFloat(), long.trim().toFloat()).start()
         }
 
