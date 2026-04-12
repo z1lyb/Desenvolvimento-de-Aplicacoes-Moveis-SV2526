@@ -36,7 +36,21 @@ Os recursos adicionais utilizados, como ícones, layouts e temas situam-se na pa
 A classe principal do programa é a **MainActivity**, usada para o inicializar.
 
 ## 4. Implementation
+### Layout da aplicação
 
+Durante a noite local:  
+
+![Informação meteorológica de Lisboa, em modo escuro](doc_images/lis_dark.jpg)
+
+![Informação meteorológica de Lisboa, em modo claro](doc_images/lis_light.jpg)
+
+Durante o dia local:  
+
+![Informação meteorológica de Los Angeles, em modo escuro](doc_images/la_dark.jpg)
+
+![Informação meteorológica de Los Angeles, em modo claro](doc_images/la_light.jpg)
+
+### Acesso ao API e tratamento de dados
 <!-- Implementation details: main modules, components, algorithms, and relevant code
 excerpts. -->
 
