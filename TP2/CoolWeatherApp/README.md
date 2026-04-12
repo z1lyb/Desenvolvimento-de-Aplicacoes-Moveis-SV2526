@@ -30,9 +30,10 @@ A imagem de fundo da aplicação é de dia ou noite com base na hora de nascer e
 correspondente, assim como a aplicação conta com um modo claro e escuro, dependendo da selecionada no dispositivo. 
 
 ## 3. Architecture and Design
-
-<!-- Architecture, folder structure, design patterns, and justification of key
-decisions. -->
+O projeto segue a estrutura de aplicações Android, onde as classes Kotlin foram criadas como 
+subpastas da dam.A51606.coolweatherapp.
+Os recursos adicionais utilizados, como ícones, layouts e temas situam-se na pasta **res**.
+A classe principal do programa é a **MainActivity**, usada para o inicializar.
 
 ## 4. Implementation
 
@@ -40,48 +41,41 @@ decisions. -->
 excerpts. -->
 
 ## 5. Testing and Validation
-
-<!-- Testing strategy, test cases, scenarios, edge cases, and known limitations. -->
+A aplicação foi testada em emuladores de Google Pixel 3, Google Tablet e num dispositivo real Samsung, 
+onde se verificou o funcionamento dos modos Portrait e Landscape, assim como o funcionamento do acesso à 
+API e possíveis casos de erro.
 
 ## 6. Usage Instructions
-
-<!-- How to run the project: requirements, setup, configuration, and execution steps. -->
+1. Abrir o projeto no Android Studio.
+2. Ligar um emulador ou conectar um dispositivo Android.
+3. Correr a aplicação.
 
 ---
 
 # Autonomous Software Engineering Sections - only for [AC OK, AI OK] sections
-
-## 7. Prompting Strategy
-<!-- Describe the prompts used with AI tools, their purpose, and how they evolved.
-Include representative examples. -->
-## 8. Autonomous Agent Workflow
-<!-- Explain how AI tools or agents contributed to development: planning, coding,
-debugging, testing, documentation, etc. -->
-## 9. Verification of AI-Generated Artifacts
-<!-- Describe how you verified correctness of AI-generated code/designs (testing,
-manual review, static analysis, etc.). -->
-## 10. Human vs AI Contribution
-<!-- Clearly state which parts were primarily human-developed and which were
-AI-assisted. -->
-## 11. Ethical and Responsible Use
-<!-- Reflect on risks, limitations, biases, or inappropriate outputs from AI tools
-and how they were handled. -->
+Não foi utilizada inteligência artificial no desenvolvimento da aplicação. 
+Toda a programação foi desenvolvida autonomamente, com consulta à documentação oficial de Kotlin, 
+assim como os websites GeeksforGeeks e StackOverflow. O relatório presente também foi inteiramente escrito por mim.
 
 ---
 
 # Development Process
 
 ## 12. Version Control and Commit History
-<!-- Describe how version control was used. The commit history must reflect
-continuous work (not only final commits). -->
+O trabalho foi mantido em repositório Git local, assim como remoto no GitHub. 
+Os commits realizados foram incrementais, refletindo a evolução do projeto e não apenas a sua finalização.
+
 ## 13. Difficulties and Lessons Learned
-<!-- Main challenges, mistakes, insights, and skills acquired during the assignment.
--->
+A principal dificuldade ultrapassada na realização da aplicação foi a implementação dos diferentes
+_layouts_ de informação e utilização dos seus _constraints_, tendo acabado por ter sucesso na sua implementação.
+
 ## 14. Future Improvements
-<!-- Possible extensions, optimizations, or features that could be added in future work. -->
+Possíveis funcionalidades a implementar como melhoria:
+* Guardar informação de temperatura em cache, a ser apresentada quando o utilizador se encontre offline.
+* Possibilidade de o utilizador escolher uma cidade em vez das suas coordenadas, associando-as automaticamente.
 
 ---
 
 ## 15. AI Usage Disclosure (Mandatory)
-<!-- List all AI tools used (e.g., ChatGPT, Copilot, etc.), how they were used, and
-confirmation that you remain responsible for all content. -->
+Não foi utilizada inteligência artificial na implementação deste repositório. Sou, portanto, 
+responsável por todo o conteúdo incluído nos ficheiros.
