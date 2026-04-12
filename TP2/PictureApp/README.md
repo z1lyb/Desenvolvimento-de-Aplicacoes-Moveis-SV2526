@@ -15,8 +15,11 @@ do segundo tutorial da disciplina. Este relatório consistirá na descrição do
 O seu objetivo é a planificação e implementação de uma aplicação que aceda a uma galeria de imagens através de uma API, com o auxílio da ferramenta Google Antigravity.
 
 ## 2. System Overview
+<!-- High-level description of the solution, main features, and use cases. -->
 
 ## 3. Architecture and Design
+<!-- Architecture, folder structure, design patterns, and justification of key
+decisions. -->
 
 ## 4. Implementation
 <!-- Implementation details: main modules, components, algorithms, and relevant code
