@@ -37,22 +37,31 @@ A classe principal do programa é a **MainActivity**, usada para o inicializar.
 
 ## 4. Implementation
 ### Layout da aplicação
+O layout da aplicação é composto por quatro temas, claro e escuro, com uma versão para o dia e noite 
+do local para cada um. Os temas foram definidos no ficheiro **themes.xml**, assim como a disposição 
+dos componentes foi criada no **activity_main.xml**, com variantes para modo _portrait_, _landscape_
+e tablet. 
 
-Durante a noite local:  
+### Acesso ao API e tratamento de dados
+Para o acesso à informação do API providenciado pelo enunciado, foram criadas as _data classes_ **WeatherData**, **CurrentWeather** 
+e **Hourly**, para guardar informação relativa a cada localização. Adicionalmente, foi criada a enum WMO_WeatherCode, que guarda as associações entre ícones apresentados e estados de tempo.
+
+Na classe principal, MainActivity, foram implementadas funções de acesso à informação do API e atualização do UI em função 
+da sua informação, interagindo com as classes anteriormente mencionadas.
+
+### Resultado final
+As imagens que se seguem ilustram o resultado final da aplicação.
+Durante a noite local (Meteorologia _default_ de Lisboa, à noite):
 
 ![Informação meteorológica de Lisboa, em modo escuro](doc_images/lis_dark.jpg)
 
 ![Informação meteorológica de Lisboa, em modo claro](doc_images/lis_light.jpg)
 
-Durante o dia local:  
+Durante o dia local (Meteorologia de Los Angeles, de dia):
 
 ![Informação meteorológica de Los Angeles, em modo escuro](doc_images/la_dark.jpg)
 
 ![Informação meteorológica de Los Angeles, em modo claro](doc_images/la_light.jpg)
-
-### Acesso ao API e tratamento de dados
-<!-- Implementation details: main modules, components, algorithms, and relevant code
-excerpts. -->
 
 ## 5. Testing and Validation
 A aplicação foi testada em emuladores de Google Pixel 3, Google Tablet e num dispositivo real Samsung, 
@@ -87,6 +96,7 @@ _layouts_ de informação e utilização dos seus _constraints_, tendo acabado p
 Possíveis funcionalidades a implementar como melhoria:
 * Guardar informação de temperatura em cache, a ser apresentada quando o utilizador se encontre offline.
 * Possibilidade de o utilizador escolher uma cidade em vez das suas coordenadas, associando-as automaticamente.
+* Implementação do modelo MVVM, para obtenção de um código mais limpo.
 
 ---
 
