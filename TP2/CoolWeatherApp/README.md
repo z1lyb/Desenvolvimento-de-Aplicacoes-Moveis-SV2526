@@ -53,6 +53,10 @@ da sua informação, interagindo com as classes anteriormente mencionadas.
 As imagens que se seguem ilustram o resultado final da aplicação.
 Durante a noite local (Meteorologia _default_ de Lisboa, à noite):
 
+<img src="doc_images/lis_dark.jpg" width="500">
+
+
+
 ![Informação meteorológica de Lisboa, em modo escuro](doc_images/lis_dark.jpg)
 
 ![Informação meteorológica de Lisboa, em modo claro](doc_images/lis_light.jpg)
