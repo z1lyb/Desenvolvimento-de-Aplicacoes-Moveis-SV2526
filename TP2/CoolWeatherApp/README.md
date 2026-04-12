@@ -54,18 +54,12 @@ As imagens que se seguem ilustram o resultado final da aplicação.
 Durante a noite local (Meteorologia _default_ de Lisboa, à noite):
 
 <img src="doc_images/lis_dark.jpg" width="500">
-
-
-
-![Informação meteorológica de Lisboa, em modo escuro](doc_images/lis_dark.jpg)
-
-![Informação meteorológica de Lisboa, em modo claro](doc_images/lis_light.jpg)
+<img src="doc_images/lis_light.jpg" width="500">
 
 Durante o dia local (Meteorologia de Los Angeles, de dia):
 
-![Informação meteorológica de Los Angeles, em modo escuro](doc_images/la_dark.jpg)
-
-![Informação meteorológica de Los Angeles, em modo claro](doc_images/la_light.jpg)
+<img src="doc_images/la_dark.jpg" width="500">
+<img src="doc_images/la_light.jpg" width="500">
 
 ## 5. Testing and Validation
 A aplicação foi testada em emuladores de Google Pixel 3, Google Tablet e num dispositivo real Samsung, 
