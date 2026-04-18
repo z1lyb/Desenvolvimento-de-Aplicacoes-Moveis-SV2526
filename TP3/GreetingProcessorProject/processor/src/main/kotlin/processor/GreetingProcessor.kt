@@ -64,7 +64,7 @@ class GreetingProcessor : AbstractProcessor() {
                 .addModifiers(KModifier.PUBLIC, KModifier.FINAL)
                 .addParameters(parameters)
                 .addStatement("println(%S)", greetingMessage) // Print greeting message
-                .addStatement("original $methodName($arguments)") // Correctly call the original method
+                .addStatement("original.$methodName($arguments)") // Correctly call the original method
 
             classBuilder.addFunction(methodBuilder.build())
         }

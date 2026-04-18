@@ -3,5 +3,5 @@ plugins {
 }
 rootProject.name = "GreetingProcessorProject"
 include("annotations")
-include("app")
 include("processor")
+include("app")
