@@ -1,0 +1,218 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/main"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".MainActivity">
+
+<!--    <TextView-->
+<!--        android:id="@+id/textView"-->
+<!--        android:layout_width="wrap_content"-->
+<!--        android:layout_height="wrap_content"-->
+<!--        android:text="Hello World!"-->
+<!--        app:layout_constraintBottom_toBottomOf="parent"-->
+<!--        app:layout_constraintEnd_toEndOf="parent"-->
+<!--        app:layout_constraintStart_toStartOf="parent"-->
+<!--        app:layout_constraintTop_toTopOf="parent" />-->
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:id="@+id/container"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        android:background="?attr/android:windowBackground"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent">
+
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:id="@+id/textBackground"
+            android:layout_width="500dp"
+            android:layout_height="300dp"
+            android:background="?attr/background"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toEndOf="@+id/updateButton"
+            app:layout_constraintTop_toTopOf="parent">
+
+            <TextView
+                android:id="@+id/latitude_label"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="10dp"
+                android:background="?attr/background"
+                android:fontFamily="sans-serif-smallcaps"
+                android:text="@string/latitude_label"
+                app:layout_constraintBottom_toTopOf="@+id/longitude_label"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent" />
+
+            <TextView
+                android:id="@+id/longitude_label"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:background="?attr/background"
+                android:fontFamily="sans-serif-smallcaps"
+                android:text="@string/longitude_label"
+                app:layout_constraintBottom_toTopOf="@+id/temperature_label"
+                app:layout_constraintStart_toStartOf="@+id/latitude_label"
+                app:layout_constraintTop_toBottomOf="@+id/latitude_label" />
+
+            <TextView
+                android:id="@+id/wind_dir_label"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:background="?attr/background"
+                android:fontFamily="sans-serif-smallcaps"
+                android:text="@string/wind_dir_label"
+                app:layout_constraintBottom_toTopOf="@+id/wind_spd_label"
+                app:layout_constraintStart_toStartOf="@+id/sea_lvl_label"
+                app:layout_constraintTop_toBottomOf="@+id/sea_lvl_label" />
+
+            <TextView
+                android:id="@+id/sea_lvl_label"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:background="?attr/background"
+                android:fontFamily="sans-serif-smallcaps"
+                android:text="@string/sea_lvl_label"
+                app:layout_constraintBottom_toTopOf="@+id/wind_dir_label"
+                app:layout_constraintStart_toStartOf="@+id/temperature_label"
+                app:layout_constraintTop_toBottomOf="@+id/temperature_label" />
+
+            <TextView
+                android:id="@+id/temperature_label"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:background="?attr/background"
+                android:fontFamily="sans-serif-smallcaps"
+                android:text="@string/temperature_label"
+                app:layout_constraintBottom_toTopOf="@+id/sea_lvl_label"
+                app:layout_constraintStart_toStartOf="@+id/longitude_label"
+                app:layout_constraintTop_toBottomOf="@+id/longitude_label" />
+
+            <TextView
+                android:id="@+id/wind_spd_label"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:background="?attr/background"
+                android:fontFamily="sans-serif-smallcaps"
+                android:text="@string/wind_spd_label"
+                app:layout_constraintBottom_toTopOf="@+id/time_label"
+                app:layout_constraintStart_toStartOf="@+id/wind_dir_label"
+                app:layout_constraintTop_toBottomOf="@+id/wind_dir_label" />
+
+            <TextView
+                android:id="@+id/time_label"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:background="?attr/background"
+                android:fontFamily="sans-serif-smallcaps"
+                android:text="@string/time_label"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintStart_toStartOf="@+id/wind_spd_label"
+                app:layout_constraintTop_toBottomOf="@+id/wind_spd_label" />
+
+            <TextView
+                android:id="@+id/temperature_text"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:background="?attr/background"
+                android:fontFamily="sans-serif-smallcaps"
+                android:text="@string/placeholder"
+                app:layout_constraintBaseline_toBaselineOf="@+id/temperature_label"
+                app:layout_constraintEnd_toEndOf="@+id/edit_longitude" />
+
+            <TextView
+                android:id="@+id/sea_lvl_text"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:background="?attr/background"
+                android:fontFamily="sans-serif-smallcaps"
+                android:text="@string/placeholder"
+                app:layout_constraintBaseline_toBaselineOf="@+id/sea_lvl_label"
+                app:layout_constraintEnd_toEndOf="@+id/temperature_text" />
+
+            <TextView
+                android:id="@+id/wind_dir_text"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:background="?attr/background"
+                android:fontFamily="sans-serif-smallcaps"
+                android:text="@string/placeholder"
+                app:layout_constraintBaseline_toBaselineOf="@+id/wind_dir_label"
+                app:layout_constraintEnd_toEndOf="@+id/sea_lvl_text" />
+
+            <TextView
+                android:id="@+id/wind_spd_text"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:background="?attr/background"
+                android:fontFamily="sans-serif-smallcaps"
+                android:text="@string/placeholder"
+                app:layout_constraintBaseline_toBaselineOf="@+id/wind_spd_label"
+                app:layout_constraintEnd_toEndOf="@+id/wind_dir_text" />
+
+            <TextView
+                android:id="@+id/time_text"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:background="?attr/background"
+                android:fontFamily="sans-serif-smallcaps"
+                android:text="@string/placeholder"
+                app:layout_constraintBaseline_toBaselineOf="@+id/time_label"
+                app:layout_constraintEnd_toEndOf="@+id/wind_spd_text" />
+
+            <EditText
+                android:id="@+id/edit_latitude"
+                android:layout_width="64dp"
+                android:layout_height="30dp"
+                android:layout_marginEnd="10dp"
+                android:background="?attr/background"
+                android:fontFamily="sans-serif-smallcaps"
+                android:hint="@string/latitude_hint"
+                android:inputType="numberDecimal|numberSigned"
+                android:textColor="?attr/android:textColor"
+                app:layout_constraintBaseline_toBaselineOf="@+id/latitude_label"
+                app:layout_constraintBottom_toTopOf="@+id/edit_longitude"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintTop_toTopOf="parent" />
+
+            <EditText
+                android:id="@+id/edit_longitude"
+                android:layout_width="64dp"
+                android:layout_height="30dp"
+                android:background="?attr/background"
+                android:fontFamily="sans-serif-smallcaps"
+                android:hint="@string/longitude_hint"
+                android:inputType="numberDecimal|numberSigned"
+                android:textColor="?attr/android:textColor"
+                app:layout_constraintBaseline_toBaselineOf="@+id/longitude_label"
+                app:layout_constraintEnd_toEndOf="@+id/edit_latitude" />
+
+        </androidx.constraintlayout.widget.ConstraintLayout>
+
+        <ImageView
+            android:id="@+id/weather_icon"
+            android:layout_width="100dp"
+            android:layout_height="100dp"
+            app:layout_constraintBottom_toTopOf="@+id/updateButton"
+            app:layout_constraintEnd_toStartOf="@+id/textBackground"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            app:srcCompat="@drawable/clear_day" />
+
+        <Button
+            android:id="@+id/updateButton"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/button_text"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toStartOf="@+id/textBackground"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/weather_icon" />
+    </androidx.constraintlayout.widget.ConstraintLayout>
+
+</androidx.constraintlayout.widget.ConstraintLayout>
