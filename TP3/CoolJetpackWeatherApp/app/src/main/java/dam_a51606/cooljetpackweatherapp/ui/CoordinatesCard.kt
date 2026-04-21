@@ -17,6 +17,7 @@ fun CoordinatesCard(
     lon: String,
     onLatitudeChange: (String) -> Unit,
     onLongitudeChange: (String) -> Unit) {
+    // Card with text fields where the user can select latitude and longitude
     Card(modifier = Modifier.fillMaxWidth().padding(8.dp)) {
         Column(modifier = Modifier.padding(16.dp)) {
             Text("Coordinates", style = MaterialTheme.typography.titleMedium)

@@ -16,34 +16,24 @@ import androidx.compose.ui.unit.dp
 fun WeatherCard(
     temperature: Float,
     windspeed: Float,
-    windDirection: Int, // º
+    windDirection: Int,
     seaLevelPressure: Float,
     time: String
 ) {
+    // Card that shows all the weather information for the location, organised into rows
     Card(modifier = Modifier.fillMaxWidth().padding(8.dp)) {
         Column(modifier = Modifier.padding(16.dp), verticalArrangement = Arrangement.spacedBy(8.dp)) {
-            // Função auxiliar para criar cada linha de dados
-            InfoRow("Sea Level Pressure", "$seaLevelPressure hPa")
-            InfoRow("Wind Direction", getWindDirection(windDirection))
-            InfoRow("Wind Speed", "$windspeed km/h")
-            InfoRow("Temperature", "$temperature ºC")
-            InfoRow("Time", time.replace("T", " "))
+            WeatherRow("Temperature", "$temperature ºC")
+            WeatherRow("Sea level pressure", "$seaLevelPressure hPa")
+            WeatherRow("Wind direction", getWindDirection(windDirection))
+            WeatherRow("Wind speed", "$windspeed km/h")
+            WeatherRow("Time", time.replace("T", " "))
         }
     }
 }
 
-@Composable
-fun InfoRow(label: String, value: String) {
-    Row(
-        modifier = Modifier.fillMaxWidth(),
-        horizontalArrangement = Arrangement.SpaceBetween
-    ) {
-        Text(text = label, fontWeight = FontWeight.Bold)
-        Text(text = value)
-    }
-}
-
 private fun getWindDirection(dir: Int): String{
+    // the wind direction is returned in degrees, so we need to "translate" it into cardinal directions
     return when {
         dir >= 337 || dir < 23  -> "N"
         dir in 23..67 -> "NE"

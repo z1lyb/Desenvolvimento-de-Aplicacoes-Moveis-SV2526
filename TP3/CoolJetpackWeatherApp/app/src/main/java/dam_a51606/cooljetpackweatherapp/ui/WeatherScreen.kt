@@ -14,6 +14,7 @@ import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.collectAsState
 import androidx.compose.runtime.getValue
+import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.platform.LocalConfiguration
 import androidx.compose.ui.platform.LocalContext
@@ -43,7 +44,7 @@ fun WeatherUI(weatherViewModel: WeatherViewModel = viewModel()) {
     val mapt = getWeatherCodeMap()
     val wCode = mapt[weathercode]
 
-    val day = weatherUIState.isDay == 1
+    val day = weatherUIState.is_day == 1
 
     val wImage = when (wCode) {
         WMO_WeatherCode.CLEAR_SKY,
@@ -108,6 +109,9 @@ fun WeatherUI(weatherViewModel: WeatherViewModel = viewModel()) {
     }
 }
 
+/**
+ * Application UI, in portrait mode
+ */
 @Composable
 fun PortraitWeatherUI(
     wIcon: Int,
@@ -127,8 +131,8 @@ fun PortraitWeatherUI(
         modifier = Modifier
             .fillMaxSize()
             .padding(16.dp)
-            .verticalScroll(rememberScrollState())
-        //horizontalAlignment = Alignment.CenterHorizontally
+            .verticalScroll(rememberScrollState()),
+        horizontalAlignment = Alignment.CenterHorizontally
     ) {
         if (wIcon != 0) {
             Image(painter = painterResource(id = wIcon), contentDescription = "Weather Icon")
@@ -154,11 +158,12 @@ fun PortraitWeatherUI(
         ) {
             Text("Update Weather")
         }
-
-        WeatherColumn(temperature, windSpeed, windDirection, seaLevelPressure, time)
     }
 }
 
+/**
+ * Application UI, in landscape mode
+ */
 @Composable
 fun LandscapeWeatherUI(
     wIcon: Int,
@@ -193,7 +198,7 @@ fun LandscapeWeatherUI(
                     contentDescription = "Weather Icon"
                 )
             }
-            WeatherColumn(temperature, windSpeed, windDirection, seaLevelPressure, time)
+            WeatherCard(temperature, windSpeed, windDirection, seaLevelPressure, time)
         }
 
     }

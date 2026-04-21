@@ -2,7 +2,9 @@ package dam_a51606.cooljetpackweatherapp.viewmodel
 
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
+import dam_a51606.cooljetpackweatherapp.data.WMO_WeatherCode
 import dam_a51606.cooljetpackweatherapp.data.WeatherAPIClient
+import dam_a51606.cooljetpackweatherapp.data.getWeatherCodeMap
 import dam_a51606.cooljetpackweatherapp.ui.WeatherUIState
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.StateFlow
@@ -18,6 +20,7 @@ class WeatherViewModel : ViewModel() {
     fun updateLatitude(latitude: Float) {
         _uiState.update { it.copy(latitude = latitude) }
     }
+
     fun updateLongitude(longitude: Float) {
         _uiState.update { it.copy(longitude = longitude) }
     }
@@ -35,13 +38,13 @@ class WeatherViewModel : ViewModel() {
             if (result != null) {
                 _uiState.update {
                     it.copy(
-                        isDay = result.current_weather.is_day,
                         temperature = result.current_weather.temperature,
                         windspeed = result.current_weather.windspeed,
                         winddirection = result.current_weather.winddirection,
                         weathercode = result.current_weather.weathercode,
                         seaLevelPressure = result.current_weather.pressure_msl,
-                        time = result.current_weather.time
+                        time = result.current_weather.time,
+                        is_day = result.current_weather.is_day,
                     )
                 }
             }
