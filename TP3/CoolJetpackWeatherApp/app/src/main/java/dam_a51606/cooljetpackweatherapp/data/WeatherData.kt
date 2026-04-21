@@ -16,6 +16,7 @@ data class CurrentWeather (
     var windspeed : Float,
     var winddirection : Int,
     var weathercode : Int,
+    var pressure_msl: Float,
     var is_day: Int,
     var time : String
 )
