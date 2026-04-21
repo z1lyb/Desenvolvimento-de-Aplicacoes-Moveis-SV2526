@@ -2,11 +2,13 @@ package dam_a51606.cooljetpackweatherapp.ui
 
 import android.content.res.Configuration
 import androidx.compose.foundation.Image
+import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.padding
+import androidx.compose.foundation.layout.size
 import androidx.compose.foundation.rememberScrollState
 import androidx.compose.foundation.verticalScroll
 import androidx.compose.material3.Button
@@ -118,7 +120,8 @@ fun PortraitWeatherUI(
             .fillMaxSize()
             .padding(16.dp)
             .verticalScroll(rememberScrollState()),
-        horizontalAlignment = Alignment.CenterHorizontally
+        horizontalAlignment = Alignment.CenterHorizontally,
+        verticalArrangement = Arrangement.Center
     ) {
 
         WeatherIcon(
@@ -174,30 +177,68 @@ fun LandscapeWeatherUI(
             .verticalScroll(rememberScrollState()),
         verticalAlignment = Alignment.CenterVertically
     ) {
-        Column(modifier = Modifier.weight(1f)) { // input + button on left side
+        Column( // input + button on left side
+            modifier = Modifier.weight(1f),
+            horizontalAlignment = Alignment.CenterHorizontally
+        ) {
             CoordinatesCard(
                 latitude.toString(),
                 longitude.toString(),
                 onLatitudeChange,
                 onLongitudeChange
             )
-            Button(onClick = onUpdateButtonClick, modifier = Modifier.padding(top = 8.dp)) {
+            Button(
+                onClick = onUpdateButtonClick,
+                modifier = Modifier.padding(top = 8.dp)
+            ) {
                 Text("Update Weather")
             }
         }
-        Column(modifier = Modifier.weight(1f)) { // weather info on right side
-
-            WeatherCard(temperature, windSpeed, windDirection, seaLevelPressure, time)
+        Column( // weather info on right side
+            modifier = Modifier.weight(1f),
+            horizontalAlignment = Alignment.CenterHorizontally
+        ) {
+            WeatherIcon(
+                weathercode,
+                is_day,
+                modifier = Modifier.size(100.dp)
+            )
+            WeatherCard(
+                temperature,
+                windSpeed,
+                windDirection,
+                seaLevelPressure,
+                time
+            )
         }
 
     }
 }
 
 
-//@Preview(showBackground = true, name = "Portrait Mode")
+@Preview(showBackground = true, name = "Portrait Mode")
+@Composable
+fun PortraitPreview() {
+    PortraitWeatherUI(
+        latitude = 38.72f,
+        longitude = -9.13f,
+        temperature = 25.5f,
+        windSpeed = 12.0f,
+        windDirection = 45,
+        weathercode = 2,
+        seaLevelPressure = 1013.2f,
+        time = "2026-04-21T10:30",
+        is_day = 1,
+        onLatitudeChange = {},
+        onLongitudeChange = {},
+        onUpdateButtonClick = {}
+    )
+}
+
+//@Preview(showBackground = true, name = "Landscape Mode", widthDp = 800, heightDp = 400)
 //@Composable
-//fun PortraitPreview() {
-//    PortraitWeatherUI(
+//fun LandscapePreview() {
+//    LandscapeWeatherUI(
 //        latitude = 38.72f,
 //        longitude = -9.13f,
 //        temperature = 25.5f,
