@@ -18,7 +18,7 @@ class WeatherViewModel : ViewModel() {
     val uiState: StateFlow<WeatherUIState> = _uiState.asStateFlow()
 
     init {
-        fetchWeather()
+        fetchWeather(_uiState.value.latitude, _uiState.value.longitude)
     }
 
     // Update latitude and longitude values from those inserted in the UI
@@ -32,12 +32,14 @@ class WeatherViewModel : ViewModel() {
 
 
     // Fetch data from the API
-    fun fetchWeather() {
+    fun fetchWeather(latitude: Float, longitude: Float) {
         viewModelScope.launch {
+            _uiState.update { it.copy(latitude = latitude, longitude = longitude) }
+
             val currentState = _uiState.value
             val result = WeatherAPIClient.getWeather(
-                currentState.latitude,
-                currentState.longitude
+                latitude,
+                longitude
             )
 
             if (result != null) {

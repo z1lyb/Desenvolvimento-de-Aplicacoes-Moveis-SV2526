@@ -1,6 +1,7 @@
 package dam_a51606.cooljetpackweatherapp.ui
 
 import android.content.res.Configuration
+import android.util.Log
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
@@ -14,8 +15,12 @@ import androidx.compose.foundation.verticalScroll
 import androidx.compose.material3.Button
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.LaunchedEffect
 import androidx.compose.runtime.collectAsState
 import androidx.compose.runtime.getValue
+import androidx.compose.runtime.mutableStateOf
+import androidx.compose.runtime.remember
+import androidx.compose.runtime.setValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.platform.LocalConfiguration
@@ -32,8 +37,19 @@ import dam_a51606.cooljetpackweatherapp.viewmodel.WeatherViewModel
 fun WeatherUI(weatherViewModel: WeatherViewModel = viewModel()) {
 
     val weatherUIState by weatherViewModel.uiState.collectAsState()
-    val latitude = weatherUIState.latitude
-    val longitude = weatherUIState.longitude
+
+    // 1. Estados locais para os TextFields (Buffers)
+    var latInput by remember { mutableStateOf(weatherUIState.latitude.toString()) }
+    var lonInput by remember { mutableStateOf(weatherUIState.longitude.toString()) }
+
+    // 2. Sincronizar se o ViewModel mudar (ex: carregamento inicial)
+    LaunchedEffect(weatherUIState.latitude, weatherUIState.longitude) {
+        latInput = weatherUIState.latitude.toString()
+        lonInput = weatherUIState.longitude.toString()
+    }
+
+//    val latitude = weatherUIState.latitude
+//    val longitude = weatherUIState.longitude
     val temperature = weatherUIState.temperature
     val windSpeed = weatherUIState.windspeed
     val windDirection = weatherUIState.winddirection
@@ -44,10 +60,15 @@ fun WeatherUI(weatherViewModel: WeatherViewModel = viewModel()) {
 
     val configuration = LocalConfiguration.current
 
+    // Função unificada para atualizar
+//    val updateWeather = {
+//
+//    }
+
     if (configuration.orientation == Configuration.ORIENTATION_LANDSCAPE) {
         LandscapeWeatherUI(
-            latitude,
-            longitude,
+            latInput,
+            lonInput,
             temperature,
             windSpeed,
             windDirection,
@@ -55,24 +76,18 @@ fun WeatherUI(weatherViewModel: WeatherViewModel = viewModel()) {
             seaLevelPressure,
             time,
             is_day,
-            onLatitudeChange = { newValue ->
-                newValue.toFloatOrNull()?.let {
-                    weatherViewModel.updateLatitude(it)
-                }
-            },
-            onLongitudeChange = { newValue ->
-                newValue.toFloatOrNull()?.let {
-                    weatherViewModel.updateLongitude(it)
-                }
-            },
+            onLatitudeChange = { latInput = it },
+            onLongitudeChange = { lonInput = it },
             onUpdateButtonClick = {
-                weatherViewModel.fetchWeather()
+                val lat = latInput.toFloatOrNull()
+                val lon = lonInput.toFloatOrNull()
+                if (lat != null && lon != null) weatherViewModel.fetchWeather(lat, lon)
             }
         )
     } else {
         PortraitWeatherUI(
-            latitude,
-            longitude,
+            latInput,
+            lonInput,
             temperature,
             windSpeed,
             windDirection,
@@ -80,18 +95,12 @@ fun WeatherUI(weatherViewModel: WeatherViewModel = viewModel()) {
             seaLevelPressure,
             time,
             is_day,
-            onLatitudeChange = { newValue ->
-                newValue.toFloatOrNull()?.let {
-                    weatherViewModel.updateLatitude(it)
-                }
-            },
-            onLongitudeChange = { newValue ->
-                newValue.toFloatOrNull()?.let {
-                    weatherViewModel.updateLongitude(it)
-                }
-            },
+            onLatitudeChange = { latInput = it },
+            onLongitudeChange = { lonInput = it },
             onUpdateButtonClick = {
-                weatherViewModel.fetchWeather()
+                val lat = latInput.toFloatOrNull()
+                val lon = lonInput.toFloatOrNull()
+                if (lat != null && lon != null) weatherViewModel.fetchWeather(lat, lon)
             }
         )
     }
@@ -102,8 +111,8 @@ fun WeatherUI(weatherViewModel: WeatherViewModel = viewModel()) {
  */
 @Composable
 fun PortraitWeatherUI(
-    latitude: Float,
-    longitude: Float,
+    latitude: String,
+    longitude: String,
     temperature: Float,
     windSpeed: Float,
     windDirection: Int,
@@ -130,8 +139,8 @@ fun PortraitWeatherUI(
         )
 
         CoordinatesCard(
-            latitude.toString(),
-            longitude.toString(),
+            latitude,
+            longitude,
             onLatitudeChange,
             onLongitudeChange
         )
@@ -157,8 +166,8 @@ fun PortraitWeatherUI(
  */
 @Composable
 fun LandscapeWeatherUI(
-    latitude: Float,
-    longitude: Float,
+    latitude: String,
+    longitude: String,
     temperature: Float,
     windSpeed: Float,
     windDirection: Int,
@@ -182,8 +191,8 @@ fun LandscapeWeatherUI(
             horizontalAlignment = Alignment.CenterHorizontally
         ) {
             CoordinatesCard(
-                latitude.toString(),
-                longitude.toString(),
+                latitude,
+                longitude,
                 onLatitudeChange,
                 onLongitudeChange
             )
@@ -214,42 +223,3 @@ fun LandscapeWeatherUI(
 
     }
 }
-
-
-@Preview(showBackground = true, name = "Portrait Mode")
-@Composable
-fun PortraitPreview() {
-    PortraitWeatherUI(
-        latitude = 38.72f,
-        longitude = -9.13f,
-        temperature = 25.5f,
-        windSpeed = 12.0f,
-        windDirection = 45,
-        weathercode = 2,
-        seaLevelPressure = 1013.2f,
-        time = "2026-04-21T10:30",
-        is_day = 1,
-        onLatitudeChange = {},
-        onLongitudeChange = {},
-        onUpdateButtonClick = {}
-    )
-}
-
-//@Preview(showBackground = true, name = "Landscape Mode", widthDp = 800, heightDp = 400)
-//@Composable
-//fun LandscapePreview() {
-//    LandscapeWeatherUI(
-//        latitude = 38.72f,
-//        longitude = -9.13f,
-//        temperature = 25.5f,
-//        windSpeed = 12.0f,
-//        windDirection = 45,
-//        weathercode = 2,
-//        seaLevelPressure = 1013.2f,
-//        time = "2026-04-21T10:30",
-//        is_day = 1,
-//        onLatitudeChange = {},
-//        onLongitudeChange = {},
-//        onUpdateButtonClick = {}
-//    )
-//}

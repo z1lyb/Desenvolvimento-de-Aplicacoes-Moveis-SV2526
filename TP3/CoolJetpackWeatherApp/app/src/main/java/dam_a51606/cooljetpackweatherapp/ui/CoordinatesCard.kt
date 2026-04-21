@@ -8,6 +8,11 @@ import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Text
 import androidx.compose.material3.TextField
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.LaunchedEffect
+import androidx.compose.runtime.getValue
+import androidx.compose.runtime.mutableStateOf
+import androidx.compose.runtime.remember
+import androidx.compose.runtime.setValue
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.unit.dp
 
@@ -17,12 +22,25 @@ fun CoordinatesCard(
     lon: String,
     onLatitudeChange: (String) -> Unit,
     onLongitudeChange: (String) -> Unit) {
+
     // Card with text fields where the user can select latitude and longitude
-    Card(modifier = Modifier.fillMaxWidth().padding(8.dp)) {
+    Card(modifier = Modifier
+        .fillMaxWidth()
+        .padding(8.dp)) {
         Column(modifier = Modifier.padding(16.dp)) {
             Text("Coordinates", style = MaterialTheme.typography.titleMedium)
-            TextField(value = lat, onValueChange = onLatitudeChange, label = { Text("Latitude") }, modifier = Modifier.fillMaxWidth())
-            TextField(value = lon, onValueChange = onLongitudeChange, label = { Text("Longitude") }, modifier = Modifier.fillMaxWidth())
+            TextField(
+                value = lat,
+                onValueChange = onLatitudeChange,
+                label = { Text("Latitude") },
+                modifier = Modifier.fillMaxWidth()
+            )
+            TextField(
+                value = lon,
+                onValueChange = onLongitudeChange,
+                label = { Text("Longitude") },
+                modifier = Modifier.fillMaxWidth()
+            )
         }
     }
 }
