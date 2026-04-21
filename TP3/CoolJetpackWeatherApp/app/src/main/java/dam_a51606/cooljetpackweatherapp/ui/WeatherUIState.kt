@@ -1,5 +1,6 @@
 package dam_a51606.cooljetpackweatherapp.ui
 
+// State of the UI, used when updating the screen
 data class WeatherUIState(
     val latitude: Float = 38.72f,
     val longitude: Float = -9.14f,

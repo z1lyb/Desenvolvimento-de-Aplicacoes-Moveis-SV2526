@@ -35,21 +35,17 @@ import dam_a51606.cooljetpackweatherapp.viewmodel.WeatherViewModel
 
 @Composable
 fun WeatherUI(weatherViewModel: WeatherViewModel = viewModel()) {
-
+    // Main screen UI and data
     val weatherUIState by weatherViewModel.uiState.collectAsState()
 
-    // 1. Estados locais para os TextFields (Buffers)
     var latInput by remember { mutableStateOf(weatherUIState.latitude.toString()) }
     var lonInput by remember { mutableStateOf(weatherUIState.longitude.toString()) }
 
-    // 2. Sincronizar se o ViewModel mudar (ex: carregamento inicial)
     LaunchedEffect(weatherUIState.latitude, weatherUIState.longitude) {
         latInput = weatherUIState.latitude.toString()
         lonInput = weatherUIState.longitude.toString()
     }
 
-//    val latitude = weatherUIState.latitude
-//    val longitude = weatherUIState.longitude
     val temperature = weatherUIState.temperature
     val windSpeed = weatherUIState.windspeed
     val windDirection = weatherUIState.winddirection
@@ -60,12 +56,7 @@ fun WeatherUI(weatherViewModel: WeatherViewModel = viewModel()) {
 
     val configuration = LocalConfiguration.current
 
-    // Função unificada para atualizar
-//    val updateWeather = {
-//
-//    }
-
-    if (configuration.orientation == Configuration.ORIENTATION_LANDSCAPE) {
+    if (configuration.orientation == Configuration.ORIENTATION_LANDSCAPE) { // depending on the device's configuration
         LandscapeWeatherUI(
             latInput,
             lonInput,

@@ -18,7 +18,6 @@ object WeatherAPIClient {
         }
     }
 
-
     suspend fun getWeather (lat: Float, lon: Float): WeatherData? {
         // Requests the API for weather information
         val reqString = buildString {

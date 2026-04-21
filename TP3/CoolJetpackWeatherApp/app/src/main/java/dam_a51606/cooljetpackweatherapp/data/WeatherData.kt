@@ -2,13 +2,14 @@ package dam_a51606.cooljetpackweatherapp.data
 
 import kotlinx.serialization.Serializable
 
+// Serializable classes where weather information is stored, as well as its weathercode-image mapping
 @Serializable
 data class WeatherData (
     var latitude: Float,
     var longitude: Float,
     var timezone: String,
     var current_weather: CurrentWeather,
-    var hourly: Hourly,
+    var hourly: Hourly
 )
 @Serializable
 data class CurrentWeather (

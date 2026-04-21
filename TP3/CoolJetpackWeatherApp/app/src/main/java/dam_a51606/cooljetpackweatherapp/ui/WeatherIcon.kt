@@ -13,6 +13,7 @@ import dam_a51606.cooljetpackweatherapp.data.getWeatherCodeMap
 
 @Composable
 fun WeatherIcon(weathercode: Int, is_day: Int, modifier: Modifier = Modifier) {
+    // Fore displaying the icon corresponding to the weapon on screen
     val context = LocalContext.current
     val iconResId = getIconResource(context, weathercode, is_day)
 
@@ -26,6 +27,7 @@ fun WeatherIcon(weathercode: Int, is_day: Int, modifier: Modifier = Modifier) {
 }
 
 fun getIconResource(context: Context, code: Int, is_day: Int): Int {
+    // Obtains the icon resource to be used in the composable
     val mapt = getWeatherCodeMap()
     val wCode = mapt[code]
 
