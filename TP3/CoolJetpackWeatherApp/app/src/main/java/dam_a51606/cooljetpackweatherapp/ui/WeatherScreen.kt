@@ -38,27 +38,12 @@ fun WeatherUI(weatherViewModel: WeatherViewModel = viewModel()) {
     val weathercode = weatherUIState.weathercode
     val seaLevelPressure = weatherUIState.seaLevelPressure
     val time = weatherUIState.time
+    val is_day = weatherUIState.is_day
 
     val configuration = LocalConfiguration.current
 
-    val mapt = getWeatherCodeMap()
-    val wCode = mapt[weathercode]
-
-    val day = weatherUIState.is_day == 1
-
-    val wImage = when (wCode) {
-        WMO_WeatherCode.CLEAR_SKY,
-        WMO_WeatherCode.MAINLY_CLEAR,
-        WMO_WeatherCode.PARTLY_CLOUDY -> if (day) "${wCode?.image}day" else "${wCode?.image}night"
-
-        else -> wCode?.image
-    }
-    val context = LocalContext.current
-    val wIcon = context.resources.getIdentifier(wImage, "drawable", context.packageName)
-
     if (configuration.orientation == Configuration.ORIENTATION_LANDSCAPE) {
         LandscapeWeatherUI(
-            wIcon,
             latitude,
             longitude,
             temperature,
@@ -67,6 +52,7 @@ fun WeatherUI(weatherViewModel: WeatherViewModel = viewModel()) {
             weathercode,
             seaLevelPressure,
             time,
+            is_day,
             onLatitudeChange = { newValue ->
                 newValue.toFloatOrNull()?.let {
                     weatherViewModel.updateLatitude(it)
@@ -83,7 +69,6 @@ fun WeatherUI(weatherViewModel: WeatherViewModel = viewModel()) {
         )
     } else {
         PortraitWeatherUI(
-            wIcon,
             latitude,
             longitude,
             temperature,
@@ -92,6 +77,7 @@ fun WeatherUI(weatherViewModel: WeatherViewModel = viewModel()) {
             weathercode,
             seaLevelPressure,
             time,
+            is_day,
             onLatitudeChange = { newValue ->
                 newValue.toFloatOrNull()?.let {
                     weatherViewModel.updateLatitude(it)
@@ -114,7 +100,6 @@ fun WeatherUI(weatherViewModel: WeatherViewModel = viewModel()) {
  */
 @Composable
 fun PortraitWeatherUI(
-    wIcon: Int,
     latitude: Float,
     longitude: Float,
     temperature: Float,
@@ -123,6 +108,7 @@ fun PortraitWeatherUI(
     weathercode: Int,
     seaLevelPressure: Float,
     time: String,
+    is_day: Int,
     onLatitudeChange: (String) -> Unit,
     onLongitudeChange: (String) -> Unit,
     onUpdateButtonClick: () -> Unit,
@@ -134,9 +120,11 @@ fun PortraitWeatherUI(
             .verticalScroll(rememberScrollState()),
         horizontalAlignment = Alignment.CenterHorizontally
     ) {
-        if (wIcon != 0) {
-            Image(painter = painterResource(id = wIcon), contentDescription = "Weather Icon")
-        }
+
+        WeatherIcon(
+            weathercode = weathercode,
+            is_day = is_day
+        )
 
         CoordinatesCard(
             latitude.toString(),
@@ -166,7 +154,6 @@ fun PortraitWeatherUI(
  */
 @Composable
 fun LandscapeWeatherUI(
-    wIcon: Int,
     latitude: Float,
     longitude: Float,
     temperature: Float,
@@ -175,11 +162,18 @@ fun LandscapeWeatherUI(
     weathercode: Int,
     seaLevelPressure: Float,
     time: String,
+    is_day: Int,
     onLatitudeChange: (String) -> Unit,
     onLongitudeChange: (String) -> Unit,
     onUpdateButtonClick: () -> Unit,
 ) {
-    Row(modifier = Modifier.fillMaxSize().padding(16.dp)) {
+    Row(
+        modifier = Modifier
+            .fillMaxSize()
+            .padding(16.dp)
+            .verticalScroll(rememberScrollState()),
+        verticalAlignment = Alignment.CenterVertically
+    ) {
         Column(modifier = Modifier.weight(1f)) { // input + button on left side
             CoordinatesCard(
                 latitude.toString(),
@@ -192,12 +186,7 @@ fun LandscapeWeatherUI(
             }
         }
         Column(modifier = Modifier.weight(1f)) { // weather info on right side
-            if (wIcon != 0) {
-                Image(
-                    painter = painterResource(id = wIcon),
-                    contentDescription = "Weather Icon"
-                )
-            }
+
             WeatherCard(temperature, windSpeed, windDirection, seaLevelPressure, time)
         }
 
@@ -205,21 +194,21 @@ fun LandscapeWeatherUI(
 }
 
 
-@Preview(showBackground = true, name = "Portrait Mode")
-@Composable
-fun PortraitPreview() {
-    PortraitWeatherUI(
-        wIcon = 0,
-        latitude = 38.72f,
-        longitude = -9.13f,
-        temperature = 25.5f,
-        windSpeed = 12.0f,
-        windDirection = 45,
-        weathercode = 1,
-        seaLevelPressure = 1013.2f,
-        time = "2026-04-21T10:30",
-        onLatitudeChange = {},
-        onLongitudeChange = {},
-        onUpdateButtonClick = {}
-    )
-}
+//@Preview(showBackground = true, name = "Portrait Mode")
+//@Composable
+//fun PortraitPreview() {
+//    PortraitWeatherUI(
+//        latitude = 38.72f,
+//        longitude = -9.13f,
+//        temperature = 25.5f,
+//        windSpeed = 12.0f,
+//        windDirection = 45,
+//        weathercode = 2,
+//        seaLevelPressure = 1013.2f,
+//        time = "2026-04-21T10:30",
+//        is_day = 1,
+//        onLatitudeChange = {},
+//        onLongitudeChange = {},
+//        onUpdateButtonClick = {}
+//    )
+//}
