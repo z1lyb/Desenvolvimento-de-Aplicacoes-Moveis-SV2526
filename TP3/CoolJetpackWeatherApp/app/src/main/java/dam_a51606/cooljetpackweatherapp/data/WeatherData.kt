@@ -4,11 +4,11 @@ import kotlinx.serialization.Serializable
 
 @Serializable
 data class WeatherData (
-    var latitude : String,
-    var longitude : String,
-    var timezone : String,
-    var current_weather : CurrentWeather,
-    var hourly : Hourly,
+    var latitude: Float,
+    var longitude: Float,
+    var timezone: String,
+    var current_weather: CurrentWeather,
+    var hourly: Hourly,
 )
 @Serializable
 data class CurrentWeather (
@@ -16,16 +16,15 @@ data class CurrentWeather (
     var windspeed : Float,
     var winddirection : Int,
     var weathercode : Int,
-    var pressure_msl: Float,
     var is_day: Int,
     var time : String
 )
 @Serializable
 data class Hourly (
-    var time : ArrayList<String>,
-    var temperature_2m : ArrayList<Float>,
-    var weathercode : ArrayList<Int>,
-    var pressure_msl : ArrayList<Double>
+    var time : List<String>,
+    var temperature_2m : List<Float>,
+    var weathercode : List<Int>,
+    var pressure_msl : List<Double>
 )
 
 enum class WMO_WeatherCode(var code: Int, var image: String) {

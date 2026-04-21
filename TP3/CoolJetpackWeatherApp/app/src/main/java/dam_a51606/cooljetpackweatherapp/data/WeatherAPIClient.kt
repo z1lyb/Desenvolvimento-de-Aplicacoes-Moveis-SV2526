@@ -1,4 +1,5 @@
 package dam_a51606.cooljetpackweatherapp.data
+import android.util.Log
 import io.ktor.client.*
 import io.ktor.client.call.*
 import io.ktor.client.plugins.contentnegotiation.*
@@ -32,6 +33,7 @@ object WeatherAPIClient {
         return try {
             client.get(reqString).body() // Parses JSON into WeatherData
         } catch(e: Exception) {
+            Log.e("DEBUG_ERRO", "Erro de Serialização: ${e.message}")
             e.printStackTrace()
             null
         }

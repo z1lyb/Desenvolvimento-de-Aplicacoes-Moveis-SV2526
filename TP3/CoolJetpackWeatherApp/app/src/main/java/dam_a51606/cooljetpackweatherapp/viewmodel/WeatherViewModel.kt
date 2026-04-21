@@ -1,5 +1,6 @@
 package dam_a51606.cooljetpackweatherapp.viewmodel
 
+import android.util.Log
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import dam_a51606.cooljetpackweatherapp.data.WMO_WeatherCode
@@ -15,6 +16,10 @@ import kotlinx.coroutines.launch
 class WeatherViewModel : ViewModel() {
     private val _uiState = MutableStateFlow(WeatherUIState())
     val uiState: StateFlow<WeatherUIState> = _uiState.asStateFlow()
+
+    init {
+        fetchWeather()
+    }
 
     // Update latitude and longitude values from those inserted in the UI
     fun updateLatitude(latitude: Float) {
@@ -42,12 +47,12 @@ class WeatherViewModel : ViewModel() {
                         windspeed = result.current_weather.windspeed,
                         winddirection = result.current_weather.winddirection,
                         weathercode = result.current_weather.weathercode,
-                        seaLevelPressure = result.current_weather.pressure_msl,
+                        seaLevelPressure = result.hourly.pressure_msl[0].toFloat(),
                         time = result.current_weather.time,
                         is_day = result.current_weather.is_day,
                     )
                 }
-            }
+            } else Log.e("WEATHER_DEBUG", "O resultado da API foi NULL")
         }
     }
 }

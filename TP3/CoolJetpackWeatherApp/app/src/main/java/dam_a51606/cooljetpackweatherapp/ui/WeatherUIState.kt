@@ -1,8 +1,8 @@
 package dam_a51606.cooljetpackweatherapp.ui
 
 data class WeatherUIState(
-    val latitude: Float = 0.0f,
-    val longitude: Float = 0.0f,
+    val latitude: Float = 38.72f,
+    val longitude: Float = -9.14f,
     val temperature: Float = 0.0f,
     val windspeed: Float = 0.0f,
     val winddirection: Int = 0, // º
