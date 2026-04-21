@@ -1,9 +1,7 @@
 package dam_a51606.cooljetpackweatherapp.ui
 
-import android.health.connect.datatypes.units.Temperature
-import dam_a51606.cooljetpackweatherapp.data.WMO_WeatherCode
-
 data class WeatherUIState(
+    val isDay: Int = 1, // 1 day 0 night
     val latitude: Float = 0.0f,
     val longitude: Float = 0.0f,
     val temperature: Float = 0.0f,

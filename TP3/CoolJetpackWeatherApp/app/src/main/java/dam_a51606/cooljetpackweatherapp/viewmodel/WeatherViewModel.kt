@@ -35,6 +35,7 @@ class WeatherViewModel : ViewModel() {
             if (result != null) {
                 _uiState.update {
                     it.copy(
+                        isDay = result.current_weather.is_day,
                         temperature = result.current_weather.temperature,
                         windspeed = result.current_weather.windspeed,
                         winddirection = result.current_weather.winddirection,

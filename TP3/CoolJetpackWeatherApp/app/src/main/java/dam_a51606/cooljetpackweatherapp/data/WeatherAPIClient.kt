@@ -1,5 +1,4 @@
 package dam_a51606.cooljetpackweatherapp.data
-
 import io.ktor.client.*
 import io.ktor.client.call.*
 import io.ktor.client.plugins.contentnegotiation.*
@@ -18,14 +17,18 @@ object WeatherAPIClient {
         }
     }
 
+
     suspend fun getWeather (lat: Float, lon: Float): WeatherData? {
+        // Requests the API for weather information
         val reqString = buildString {
             append("https://api.open-meteo.com/v1/forecast?")
             append("latitude=${lat}&longitude=${lon}&")
             append("current_weather=true&")
-            append("hourly=temperature_2m,weathercode,pressure_msl,windspeed_10m,pressure_msl")
+            append("timezone=auto&") // for showing the time correctly
+            append("hourly=temperature_2m,weathercode,pressure_msl,windspeed_10m")
         }
         System.out.println("Getting URL: $reqString")
+
         return try {
             client.get(reqString).body() // Parses JSON into WeatherData
         } catch(e: Exception) {
