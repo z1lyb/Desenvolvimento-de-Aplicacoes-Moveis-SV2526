@@ -9,8 +9,10 @@ import androidx.compose.material3.Card
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.dp
+import dam_a51606.cooljetpackweatherapp.R
 
 @Composable
 fun WeatherCard(
@@ -23,11 +25,11 @@ fun WeatherCard(
     // Card that shows all the weather information for the location, organised into rows
     Card(modifier = Modifier.fillMaxWidth().padding(8.dp)) {
         Column(modifier = Modifier.padding(16.dp), verticalArrangement = Arrangement.spacedBy(8.dp)) {
-            WeatherRow("Temperature", "$temperature ºC")
-            WeatherRow("Sea level pressure", "$seaLevelPressure hPa")
-            WeatherRow("Wind direction", getWindDirection(windDirection))
-            WeatherRow("Wind speed", "$windspeed km/h")
-            WeatherRow("Time", time.replace("T", " "))
+            WeatherRow(stringResource(R.string.temperature_label), "$temperature ºC")
+            WeatherRow(stringResource(R.string.sea_lvl_label), "$seaLevelPressure hPa")
+            WeatherRow(stringResource(R.string.wind_dir_label), getWindDirection(windDirection))
+            WeatherRow(stringResource(R.string.wind_spd_label), "$windspeed km/h")
+            WeatherRow(stringResource(R.string.time_label), time.replace("T", " "))
         }
     }
 }

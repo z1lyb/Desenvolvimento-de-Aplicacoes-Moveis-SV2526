@@ -26,9 +26,11 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.platform.LocalConfiguration
 import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.res.painterResource
+import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.lifecycle.viewmodel.compose.viewModel
+import dam_a51606.cooljetpackweatherapp.R
 import dam_a51606.cooljetpackweatherapp.data.WMO_WeatherCode
 import dam_a51606.cooljetpackweatherapp.data.getWeatherCodeMap
 import dam_a51606.cooljetpackweatherapp.viewmodel.WeatherViewModel
@@ -147,7 +149,7 @@ fun PortraitWeatherUI(
             onClick = onUpdateButtonClick,
             modifier = Modifier.fillMaxWidth().padding(vertical = 8.dp)
         ) {
-            Text("Update Weather")
+            Text(stringResource(R.string.button_text))
         }
     }
 }
@@ -191,7 +193,7 @@ fun LandscapeWeatherUI(
                 onClick = onUpdateButtonClick,
                 modifier = Modifier.padding(top = 8.dp)
             ) {
-                Text("Update Weather")
+                Text(stringResource(R.string.button_text))
             }
         }
         Column( // weather info on right side

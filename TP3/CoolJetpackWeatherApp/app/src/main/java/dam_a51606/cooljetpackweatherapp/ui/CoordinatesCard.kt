@@ -14,7 +14,9 @@ import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
 import androidx.compose.runtime.setValue
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.unit.dp
+import dam_a51606.cooljetpackweatherapp.R
 
 @Composable
 fun CoordinatesCard(
@@ -28,17 +30,17 @@ fun CoordinatesCard(
         .fillMaxWidth()
         .padding(8.dp)) {
         Column(modifier = Modifier.padding(16.dp)) {
-            Text("Coordinates", style = MaterialTheme.typography.titleMedium)
+            Text(stringResource(R.string.coordinates_label), style = MaterialTheme.typography.titleMedium)
             TextField(
                 value = lat,
                 onValueChange = onLatitudeChange,
-                label = { Text("Latitude") },
+                label = { Text(stringResource(R.string.latitude_label)) },
                 modifier = Modifier.fillMaxWidth()
             )
             TextField(
                 value = lon,
                 onValueChange = onLongitudeChange,
-                label = { Text("Longitude") },
+                label = { Text(stringResource(R.string.longitude_label)) },
                 modifier = Modifier.fillMaxWidth()
             )
         }
