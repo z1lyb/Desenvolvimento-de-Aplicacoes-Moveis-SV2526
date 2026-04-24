@@ -6,6 +6,7 @@ import androidx.activity.compose.setContent
 import androidx.activity.enableEdgeToEdge
 import androidx.compose.runtime.*
 import dam_a51606.cooljetpackweatherapp.ui.WeatherUI
+import dam_a51606.cooljetpackweatherapp.ui.theme.AppTheme
 
 class MainActivity : ComponentActivity() {
 
@@ -13,7 +14,9 @@ class MainActivity : ComponentActivity() {
         super.onCreate(savedInstanceState)
         enableEdgeToEdge()
         setContent {
-            WeatherUI()
+            AppTheme {
+                WeatherUI()
+            }
         }
     }
 

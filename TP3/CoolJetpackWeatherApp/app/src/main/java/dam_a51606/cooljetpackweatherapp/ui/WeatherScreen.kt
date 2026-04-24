@@ -13,6 +13,10 @@ import androidx.compose.foundation.layout.size
 import androidx.compose.foundation.rememberScrollState
 import androidx.compose.foundation.verticalScroll
 import androidx.compose.material3.Button
+import androidx.compose.material3.ButtonColors
+import androidx.compose.material3.ButtonDefaults
+import androidx.compose.material3.MaterialTheme
+import androidx.compose.material3.Surface
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.LaunchedEffect
@@ -117,39 +121,45 @@ fun PortraitWeatherUI(
     onLongitudeChange: (String) -> Unit,
     onUpdateButtonClick: () -> Unit,
 ) {
-    Column(
-        modifier = Modifier
-            .fillMaxSize()
-            .padding(16.dp)
-            .verticalScroll(rememberScrollState()),
-        horizontalAlignment = Alignment.CenterHorizontally,
-        verticalArrangement = Arrangement.Center
-    ) {
 
-        WeatherIcon(
-            weathercode = weathercode,
-            is_day = is_day
-        )
-
-        CoordinatesCard(
-            latitude,
-            longitude,
-            onLatitudeChange,
-            onLongitudeChange
-        )
-
-        WeatherCard(
-            temperature,
-            windSpeed,
-            windDirection,
-            seaLevelPressure,
-            time)
-
-        Button(
-            onClick = onUpdateButtonClick,
-            modifier = Modifier.fillMaxWidth().padding(vertical = 8.dp)
+    Surface(color = MaterialTheme.colorScheme.background) {
+        Column(
+            modifier = Modifier
+                .fillMaxSize()
+                .padding(16.dp)
+                .verticalScroll(rememberScrollState()),
+            horizontalAlignment = Alignment.CenterHorizontally,
+            verticalArrangement = Arrangement.Center
         ) {
-            Text(stringResource(R.string.button_text))
+
+            WeatherIcon(
+                weathercode = weathercode,
+                is_day = is_day
+            )
+
+            CoordinatesCard(
+                latitude,
+                longitude,
+                onLatitudeChange,
+                onLongitudeChange
+            )
+
+            WeatherCard(
+                temperature,
+                windSpeed,
+                windDirection,
+                seaLevelPressure,
+                time)
+
+            Button(
+                onClick = onUpdateButtonClick,
+                modifier = Modifier.fillMaxWidth().padding(vertical = 8.dp),
+                colors = ButtonDefaults.buttonColors(
+                    containerColor = MaterialTheme.colorScheme.primary
+                )
+            ) {
+                Text(stringResource(R.string.button_text))
+            }
         }
     }
 }
@@ -172,47 +182,53 @@ fun LandscapeWeatherUI(
     onLongitudeChange: (String) -> Unit,
     onUpdateButtonClick: () -> Unit,
 ) {
-    Row(
-        modifier = Modifier
-            .fillMaxSize()
-            .padding(16.dp)
-            .verticalScroll(rememberScrollState()),
-        verticalAlignment = Alignment.CenterVertically
-    ) {
-        Column( // input + button on left side
-            modifier = Modifier.weight(1f),
-            horizontalAlignment = Alignment.CenterHorizontally
-        ) {
-            CoordinatesCard(
-                latitude,
-                longitude,
-                onLatitudeChange,
-                onLongitudeChange
-            )
-            Button(
-                onClick = onUpdateButtonClick,
-                modifier = Modifier.padding(top = 8.dp)
-            ) {
-                Text(stringResource(R.string.button_text))
-            }
-        }
-        Column( // weather info on right side
-            modifier = Modifier.weight(1f),
-            horizontalAlignment = Alignment.CenterHorizontally
-        ) {
-            WeatherIcon(
-                weathercode,
-                is_day,
-                modifier = Modifier.size(100.dp)
-            )
-            WeatherCard(
-                temperature,
-                windSpeed,
-                windDirection,
-                seaLevelPressure,
-                time
-            )
-        }
 
+    Surface(color = MaterialTheme.colorScheme.background) {
+        Row(
+            modifier = Modifier
+                .fillMaxSize()
+                .padding(16.dp)
+                .verticalScroll(rememberScrollState()),
+            verticalAlignment = Alignment.CenterVertically
+        ) {
+            Column( // input + button on left side
+                modifier = Modifier.weight(1f),
+                horizontalAlignment = Alignment.CenterHorizontally
+            ) {
+                CoordinatesCard(
+                    latitude,
+                    longitude,
+                    onLatitudeChange,
+                    onLongitudeChange
+                )
+                Button(
+                    onClick = onUpdateButtonClick,
+                    modifier = Modifier.padding(top = 8.dp),
+                    colors = ButtonDefaults.buttonColors(
+                        containerColor = MaterialTheme.colorScheme.primary
+                    )
+                ) {
+                    Text(stringResource(R.string.button_text))
+                }
+            }
+            Column( // weather info on right side
+                modifier = Modifier.weight(1f),
+                horizontalAlignment = Alignment.CenterHorizontally
+            ) {
+                WeatherIcon(
+                    weathercode,
+                    is_day,
+                    modifier = Modifier.size(100.dp)
+                )
+                WeatherCard(
+                    temperature,
+                    windSpeed,
+                    windDirection,
+                    seaLevelPressure,
+                    time
+                )
+            }
+
+        }
     }
 }
