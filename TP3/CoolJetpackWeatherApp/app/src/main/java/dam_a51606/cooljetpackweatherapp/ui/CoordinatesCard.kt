@@ -1,21 +1,22 @@
 package dam_a51606.cooljetpackweatherapp.ui
 
+import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
+import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.text.KeyboardOptions
+import androidx.compose.material.icons.Icons
+import androidx.compose.material.icons.filled.Public
 import androidx.compose.material3.Card
 import androidx.compose.material3.CardDefaults
+import androidx.compose.material3.Icon
+import androidx.compose.material3.IconButton
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Text
 import androidx.compose.material3.TextField
 import androidx.compose.material3.TextFieldDefaults
 import androidx.compose.runtime.Composable
-import androidx.compose.runtime.LaunchedEffect
-import androidx.compose.runtime.getValue
-import androidx.compose.runtime.mutableStateOf
-import androidx.compose.runtime.remember
-import androidx.compose.runtime.setValue
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.input.KeyboardType
@@ -27,8 +28,9 @@ fun CoordinatesCard(
     lat: String,
     lon: String,
     onLatitudeChange: (String) -> Unit,
-    onLongitudeChange: (String) -> Unit) {
-
+    onLongitudeChange: (String) -> Unit,
+    onLocationIconClick: () -> Unit
+    ) {
     // Card with text fields where the user can select latitude and longitude
     Card(modifier = Modifier
         .fillMaxWidth()
@@ -38,7 +40,24 @@ fun CoordinatesCard(
         )
     ) {
         Column(modifier = Modifier.padding(16.dp)) {
-            Text(stringResource(R.string.coordinates_label), style = MaterialTheme.typography.titleMedium)
+            Row(
+                modifier = Modifier.fillMaxWidth(),
+                horizontalArrangement = Arrangement.SpaceBetween
+            ) {
+                Text(
+                    stringResource(R.string.coordinates_label),
+                    style = MaterialTheme.typography.titleMedium
+                )
+                IconButton( // Location picker icon
+                    onClick =  onLocationIconClick
+                ) {
+                    Icon(
+                        imageVector = Icons.Default.Public,
+                        contentDescription = "Globe icon"
+                    )
+                }
+            }
+
             TextField(
                 value = lat,
                 onValueChange = onLatitudeChange,

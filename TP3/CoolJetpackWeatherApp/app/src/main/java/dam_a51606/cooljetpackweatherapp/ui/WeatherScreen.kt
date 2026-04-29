@@ -1,8 +1,10 @@
 package dam_a51606.cooljetpackweatherapp.ui
 
+import android.app.Activity
+import android.content.Context
+import android.content.Intent
 import android.content.res.Configuration
-import android.util.Log
-import androidx.compose.foundation.Image
+import androidx.activity.compose.ManagedActivityResultLauncher
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Row
@@ -13,7 +15,6 @@ import androidx.compose.foundation.layout.size
 import androidx.compose.foundation.rememberScrollState
 import androidx.compose.foundation.verticalScroll
 import androidx.compose.material3.Button
-import androidx.compose.material3.ButtonColors
 import androidx.compose.material3.ButtonDefaults
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Surface
@@ -29,15 +30,14 @@ import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.platform.LocalConfiguration
 import androidx.compose.ui.platform.LocalContext
-import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.res.stringResource
-import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.lifecycle.viewmodel.compose.viewModel
 import dam_a51606.cooljetpackweatherapp.R
-import dam_a51606.cooljetpackweatherapp.data.WMO_WeatherCode
-import dam_a51606.cooljetpackweatherapp.data.getWeatherCodeMap
 import dam_a51606.cooljetpackweatherapp.viewmodel.WeatherViewModel
+import androidx.activity.compose.rememberLauncherForActivityResult
+import androidx.activity.result.ActivityResult
+import androidx.activity.result.contract.ActivityResultContracts
 
 @Composable
 fun WeatherUI(weatherViewModel: WeatherViewModel = viewModel()) {
@@ -62,6 +62,18 @@ fun WeatherUI(weatherViewModel: WeatherViewModel = viewModel()) {
 
     val configuration = LocalConfiguration.current
 
+    val context = LocalContext.current
+
+    val launcher = rememberLauncherForActivityResult(
+        contract = ActivityResultContracts.StartActivityForResult()
+    ) { result ->
+        if (result.resultCode == Activity.RESULT_OK) {
+            val lat = result.data?.getFloatExtra("latitude", 0f) ?: 0f
+            val lon = result.data?.getFloatExtra("longitude", 0f) ?: 0f
+            weatherViewModel.fetchWeather(lat, lon)
+        }
+    }
+
     if (configuration.orientation == Configuration.ORIENTATION_LANDSCAPE) { // depending on the device's configuration
         LandscapeWeatherUI(
             latInput,
@@ -79,7 +91,8 @@ fun WeatherUI(weatherViewModel: WeatherViewModel = viewModel()) {
                 val lat = latInput.toFloatOrNull()
                 val lon = lonInput.toFloatOrNull()
                 if (lat != null && lon != null) weatherViewModel.fetchWeather(lat, lon)
-            }
+            },
+            onLocationIconClick = { onLocationIconClick(context, launcher) }
         )
     } else {
         PortraitWeatherUI(
@@ -98,9 +111,15 @@ fun WeatherUI(weatherViewModel: WeatherViewModel = viewModel()) {
                 val lat = latInput.toFloatOrNull()
                 val lon = lonInput.toFloatOrNull()
                 if (lat != null && lon != null) weatherViewModel.fetchWeather(lat, lon)
-            }
+            },
+            onLocationIconClick = { onLocationIconClick(context, launcher) }
         )
     }
+}
+
+fun onLocationIconClick(context: Context, launcher: ManagedActivityResultLauncher<Intent, ActivityResult>) {
+    val intent = Intent(context, LocationPickerActivity::class.java)
+    launcher.launch(intent)
 }
 
 /**
@@ -120,6 +139,7 @@ fun PortraitWeatherUI(
     onLatitudeChange: (String) -> Unit,
     onLongitudeChange: (String) -> Unit,
     onUpdateButtonClick: () -> Unit,
+    onLocationIconClick: () -> Unit
 ) {
 
     Surface(color = MaterialTheme.colorScheme.background) {
@@ -141,7 +161,8 @@ fun PortraitWeatherUI(
                 latitude,
                 longitude,
                 onLatitudeChange,
-                onLongitudeChange
+                onLongitudeChange,
+                onLocationIconClick
             )
 
             WeatherCard(
@@ -181,6 +202,7 @@ fun LandscapeWeatherUI(
     onLatitudeChange: (String) -> Unit,
     onLongitudeChange: (String) -> Unit,
     onUpdateButtonClick: () -> Unit,
+    onLocationIconClick: () -> Unit
 ) {
 
     Surface(color = MaterialTheme.colorScheme.background) {
@@ -199,7 +221,8 @@ fun LandscapeWeatherUI(
                     latitude,
                     longitude,
                     onLatitudeChange,
-                    onLongitudeChange
+                    onLongitudeChange,
+                    onLocationIconClick
                 )
                 Button(
                     onClick = onUpdateButtonClick,

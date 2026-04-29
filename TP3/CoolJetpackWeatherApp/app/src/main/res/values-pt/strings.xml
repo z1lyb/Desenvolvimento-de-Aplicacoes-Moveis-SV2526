@@ -9,4 +9,5 @@
     <string name="wind_spd_label">Velocidade do vento</string>
     <string name="time_label">Hora</string>
     <string name="coordinates_label">Coordenadas</string>
+    <string name="update_location">Escolher Localização</string>
 </resources>
