@@ -49,7 +49,10 @@ Step 16
 Create the :app-compose module, and rewrite the XML Views application related resources in the :app-xml module to Jetpack Compose.
 
 Step 17
+Add a flickering pointer to the search bar when selected, so it shows the user is typing something.
+
+Step 18
 Only in the :app-compose module, add a pull-to-refresh functionality for the image grid, which replaces the refresh button.
 
-Step 18 
+Step 19 
 Only in the :app-compose module, add an animation between main and detail screens, which enlarges the selected image until the desired final size.

@@ -1,6 +1,8 @@
 package com.example.catmap.ui.screens
 
+import androidx.compose.animation.core.*
 import androidx.compose.foundation.clickable
+import androidx.compose.foundation.interaction.collectIsFocusedAsState
 import androidx.compose.foundation.layout.*
 import androidx.compose.foundation.lazy.grid.GridCells
 import androidx.compose.foundation.lazy.grid.LazyVerticalGrid
@@ -8,13 +10,16 @@ import androidx.compose.foundation.lazy.grid.items
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.filled.Favorite
 import androidx.compose.material.icons.filled.FavoriteBorder
-import androidx.compose.material.icons.filled.Refresh
 import androidx.compose.material.icons.filled.Search
 import androidx.compose.material3.*
+import androidx.compose.material3.pulltorefresh.PullToRefreshContainer
+import androidx.compose.material3.pulltorefresh.rememberPullToRefreshState
 import androidx.compose.runtime.*
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
+import androidx.compose.ui.graphics.graphicsLayer
+import androidx.compose.ui.input.nestedscroll.nestedScroll
 import androidx.compose.ui.layout.ContentScale
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.res.stringResource
@@ -44,16 +49,50 @@ fun MainScreen(
         else images.filter { it.breed?.name?.contains(searchQuery, ignoreCase = true) == true }
     }
 
+    val pullToRefreshState = rememberPullToRefreshState()
+
+    LaunchedEffect(isLoading) {
+        if (!isLoading) {
+            pullToRefreshState.endRefresh()
+        }
+    }
+
+    if (pullToRefreshState.isRefreshing) {
+        LaunchedEffect(true) {
+            viewModel.fetchImages()
+        }
+    }
+
     Scaffold(
         topBar = {
             TopAppBar(
                 title = {
+                    val interactionSource = remember { androidx.compose.foundation.interaction.MutableInteractionSource() }
+                    val isFocused by interactionSource.collectIsFocusedAsState()
+                    val infiniteTransition = rememberInfiniteTransition(label = "flicker")
+                    val alpha by infiniteTransition.animateFloat(
+                        initialValue = 1f,
+                        targetValue = 0.3f,
+                        animationSpec = infiniteRepeatable(
+                            animation = tween(500, easing = LinearEasing),
+                            repeatMode = RepeatMode.Reverse
+                        ),
+                        label = "alpha"
+                    )
+
                     TextField(
                         value = searchQuery,
                         onValueChange = { viewModel.onSearchQueryChange(it) },
                         placeholder = { Text(stringResource(R.string.search_hint)) },
-                        leadingIcon = { Icon(Icons.Default.Search, contentDescription = null) },
+                        leadingIcon = { 
+                            Icon(
+                                Icons.Default.Search, 
+                                contentDescription = null,
+                                modifier = Modifier.graphicsLayer(alpha = if (isFocused) alpha else 1f)
+                            ) 
+                        },
                         modifier = Modifier.fillMaxWidth(),
+                        interactionSource = interactionSource,
                         colors = TextFieldDefaults.colors(
                             focusedContainerColor = Color.Transparent,
                             unfocusedContainerColor = Color.Transparent,
@@ -65,7 +104,8 @@ fun MainScreen(
                             focusedPlaceholderColor = Color.White.copy(alpha = 0.7f),
                             unfocusedPlaceholderColor = Color.White.copy(alpha = 0.7f),
                             focusedLeadingIconColor = Color.White,
-                            unfocusedLeadingIconColor = Color.White
+                            unfocusedLeadingIconColor = Color.White,
+                            cursorColor = Color.White
                         ),
                         singleLine = true
                     )
@@ -81,18 +121,26 @@ fun MainScreen(
                     actionIconContentColor = MaterialTheme.colorScheme.onPrimary
                 )
             )
-        },
-        floatingActionButton = {
-            FloatingActionButton(
-                onClick = { viewModel.fetchImages() },
-                containerColor = MaterialTheme.colorScheme.secondary,
-                contentColor = Color.White
-            ) {
-                Icon(Icons.Default.Refresh, contentDescription = "Refresh")
-            }
         }
     ) { padding ->
-        Box(modifier = Modifier.padding(padding).fillMaxSize()) {
+        Box(
+            modifier = Modifier
+                .padding(padding)
+                .fillMaxSize()
+                .nestedScroll(pullToRefreshState.nestedScrollConnection)
+        ) {
+            if (isLoading) {
+                LinearProgressIndicator(
+                    progress = { loadingProgress / 100f },
+                    modifier = Modifier
+                        .fillMaxWidth()
+                        .height(2.dp)
+                        .align(Alignment.TopCenter),
+                    color = MaterialTheme.colorScheme.primary,
+                    trackColor = Color.Transparent
+                )
+            }
+
             if (isLoading && images.isEmpty()) {
                 Column(
                     modifier = Modifier.fillMaxSize(),
@@ -140,6 +188,13 @@ fun MainScreen(
                     }
                 }
             }
+
+            PullToRefreshContainer(
+                state = pullToRefreshState,
+                modifier = Modifier.align(Alignment.TopCenter),
+                containerColor = MaterialTheme.colorScheme.primary,
+                contentColor = Color.White
+            )
         }
     }
 }

@@ -150,3 +150,21 @@ Prompt: Create the :app-compose module, according to step 16 of the implementati
 Result: An application with the same features as the app-xml one, but implemented with Jetpack Compose.
 
 ---
+
+## MIP3 - Prompt 16
+
+Goal: Adding a flickering pointer to the search bar when selected.
+
+Prompt: Referring to 08_implementation_plan.md step 17, add a flickering pointer to the search bar in the jetpack app when selected, so it shows the user is typing something.
+
+Result: The flickering cursor and search icon are now implemented in the search bar.
+
+---
+
+## MIP3 - Prompt 17
+
+Goal: Adding a pull-to-refresh functionality to the main screen.
+
+Prompt: According to 08_implementation_plan.md step 18, add a pull-to-refresh functionality for the image grid in the jetpack app. This should replace the refresh button.
+
+Result: Pulling the screen creates a circle animation and progress bar at the top of the screen, until the images are refreshed. The refresh button no longer exists.
