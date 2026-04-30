@@ -41,3 +41,18 @@ Implement progress bar for loading images
 
 Step 14
 Implement favorite items functionality
+
+Step 15 (MIP 3)
+Separate the application into modules: :core, which has the data models and API access, and :app-xml, which has the XML Views application related resources.
+
+Step 16
+Create the :app-compose module.
+
+Step 17
+Rewrite the XML Views application related resources in the :app-xml module to Jetpack Compose.
+
+Step 18
+Only in the :app-compose module, add a pull-to-refresh functionality for the image grid, which replaces the refresh button.
+
+Step 19
+Only in the :app-compose module, add an animation between main and detail screens, which enlarges the selected image until the desired final size.
