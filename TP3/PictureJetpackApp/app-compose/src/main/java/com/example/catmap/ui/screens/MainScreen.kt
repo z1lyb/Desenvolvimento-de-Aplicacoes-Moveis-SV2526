@@ -1,5 +1,8 @@
 package com.example.catmap.ui.screens
 
+import androidx.compose.animation.AnimatedVisibilityScope
+import androidx.compose.animation.ExperimentalSharedTransitionApi
+import androidx.compose.animation.SharedTransitionScope
 import androidx.compose.animation.core.*
 import androidx.compose.foundation.clickable
 import androidx.compose.foundation.interaction.collectIsFocusedAsState
@@ -12,7 +15,8 @@ import androidx.compose.material.icons.filled.Favorite
 import androidx.compose.material.icons.filled.FavoriteBorder
 import androidx.compose.material.icons.filled.Search
 import androidx.compose.material3.*
-import androidx.compose.material3.pulltorefresh.PullToRefreshContainer
+import androidx.compose.material3.pulltorefresh.PullToRefreshBox
+import androidx.compose.material3.pulltorefresh.PullToRefreshDefaults
 import androidx.compose.material3.pulltorefresh.rememberPullToRefreshState
 import androidx.compose.runtime.*
 import androidx.compose.ui.Alignment
@@ -30,10 +34,12 @@ import com.example.catmap.model.ImageItem
 import com.example.catmap.ui.theme.HeartRed
 import com.example.catmap.ui.viewmodel.MainViewModel
 
-@OptIn(ExperimentalMaterial3Api::class)
+@OptIn(ExperimentalMaterial3Api::class, ExperimentalSharedTransitionApi::class)
 @Composable
 fun MainScreen(
     viewModel: MainViewModel,
+    sharedTransitionScope: SharedTransitionScope,
+    animatedVisibilityScope: AnimatedVisibilityScope,
     onImageClick: (ImageItem) -> Unit,
     onFavoritesClick: () -> Unit
 ) {
@@ -50,16 +56,11 @@ fun MainScreen(
     }
 
     val pullToRefreshState = rememberPullToRefreshState()
+    var isPullRefreshing by remember { mutableStateOf(false) }
 
     LaunchedEffect(isLoading) {
         if (!isLoading) {
-            pullToRefreshState.endRefresh()
-        }
-    }
-
-    if (pullToRefreshState.isRefreshing) {
-        LaunchedEffect(true) {
-            viewModel.fetchImages()
+            isPullRefreshing = false
         }
     }
 
@@ -123,86 +124,100 @@ fun MainScreen(
             )
         }
     ) { padding ->
-        Box(
+        PullToRefreshBox(
+            isRefreshing = isPullRefreshing,
+            onRefresh = { 
+                isPullRefreshing = true
+                viewModel.fetchImages() 
+            },
+            state = pullToRefreshState,
             modifier = Modifier
                 .padding(padding)
-                .fillMaxSize()
-                .nestedScroll(pullToRefreshState.nestedScrollConnection)
-        ) {
-            if (isLoading) {
-                LinearProgressIndicator(
-                    progress = { loadingProgress / 100f },
-                    modifier = Modifier
-                        .fillMaxWidth()
-                        .height(2.dp)
-                        .align(Alignment.TopCenter),
-                    color = MaterialTheme.colorScheme.primary,
-                    trackColor = Color.Transparent
+                .fillMaxSize(),
+            indicator = {
+                PullToRefreshDefaults.Indicator(
+                    state = pullToRefreshState,
+                    isRefreshing = isPullRefreshing,
+                    modifier = Modifier.align(Alignment.TopCenter),
+                    containerColor = MaterialTheme.colorScheme.primary,
+                    color = Color.White
                 )
             }
-
-            if (isLoading && images.isEmpty()) {
-                Column(
-                    modifier = Modifier.fillMaxSize(),
-                    verticalArrangement = Arrangement.Center,
-                    horizontalAlignment = Alignment.CenterHorizontally
-                ) {
-                    CircularProgressIndicator(color = MaterialTheme.colorScheme.primary)
-                    Spacer(modifier = Modifier.height(8.dp))
-                    Text("Loading... $loadingProgress%")
+        ) {
+            Box(modifier = Modifier.fillMaxSize()) {
+                if (isLoading) {
                     LinearProgressIndicator(
                         progress = { loadingProgress / 100f },
-                        modifier = Modifier.width(200.dp),
-                        color = MaterialTheme.colorScheme.primary
+                        modifier = Modifier
+                            .fillMaxWidth()
+                            .height(2.dp)
+                            .align(Alignment.TopCenter),
+                        color = MaterialTheme.colorScheme.primary,
+                        trackColor = Color.Transparent
                     )
                 }
-            } else if (errorMessage != null && images.isEmpty()) {
-                Column(
-                    modifier = Modifier.fillMaxSize(),
-                    verticalArrangement = Arrangement.Center,
-                    horizontalAlignment = Alignment.CenterHorizontally
-                ) {
-                    Text(errorMessage!!, color = Color.Red)
-                    Button(
-                        onClick = { viewModel.fetchImages() },
-                        colors = ButtonDefaults.buttonColors(containerColor = MaterialTheme.colorScheme.primary)
+
+                if (isLoading && images.isEmpty()) {
+                    Column(
+                        modifier = Modifier.fillMaxSize(),
+                        verticalArrangement = Arrangement.Center,
+                        horizontalAlignment = Alignment.CenterHorizontally
                     ) {
-                        Text("Retry")
-                    }
-                }
-            } else {
-                LazyVerticalGrid(
-                    columns = GridCells.Fixed(2),
-                    contentPadding = PaddingValues(8.dp),
-                    modifier = Modifier.fillMaxSize(),
-                    verticalArrangement = Arrangement.spacedBy(8.dp),
-                    horizontalArrangement = Arrangement.spacedBy(8.dp)
-                ) {
-                    items(filteredImages) { image ->
-                        ImageCard(
-                            image = image,
-                            isFavorite = favoriteIds.contains(image.id),
-                            onClick = { onImageClick(image) },
-                            onFavoriteToggle = { viewModel.toggleFavorite(image) }
+                        CircularProgressIndicator(color = MaterialTheme.colorScheme.primary)
+                        Spacer(modifier = Modifier.height(8.dp))
+                        Text("Loading... $loadingProgress%")
+                        LinearProgressIndicator(
+                            progress = { loadingProgress / 100f },
+                            modifier = Modifier.width(200.dp),
+                            color = MaterialTheme.colorScheme.primary
                         )
+                    }
+                } else if (errorMessage != null && images.isEmpty()) {
+                    Column(
+                        modifier = Modifier.fillMaxSize(),
+                        verticalArrangement = Arrangement.Center,
+                        horizontalAlignment = Alignment.CenterHorizontally
+                    ) {
+                        Text(errorMessage!!, color = Color.Red)
+                        Button(
+                            onClick = { viewModel.fetchImages() },
+                            colors = ButtonDefaults.buttonColors(containerColor = MaterialTheme.colorScheme.primary)
+                        ) {
+                            Text("Retry")
+                        }
+                    }
+                } else {
+                    LazyVerticalGrid(
+                        columns = GridCells.Fixed(2),
+                        contentPadding = PaddingValues(8.dp),
+                        modifier = Modifier.fillMaxSize(),
+                        verticalArrangement = Arrangement.spacedBy(8.dp),
+                        horizontalArrangement = Arrangement.spacedBy(8.dp)
+                    ) {
+                        items(filteredImages, key = { it.id }) { image ->
+                            ImageCard(
+                                image = image,
+                                isFavorite = favoriteIds.contains(image.id),
+                                sharedTransitionScope = sharedTransitionScope,
+                                animatedVisibilityScope = animatedVisibilityScope,
+                                onClick = { onImageClick(image) },
+                                onFavoriteToggle = { viewModel.toggleFavorite(image) }
+                            )
+                        }
                     }
                 }
             }
-
-            PullToRefreshContainer(
-                state = pullToRefreshState,
-                modifier = Modifier.align(Alignment.TopCenter),
-                containerColor = MaterialTheme.colorScheme.primary,
-                contentColor = Color.White
-            )
         }
     }
 }
 
+@OptIn(ExperimentalSharedTransitionApi::class)
 @Composable
 fun ImageCard(
     image: ImageItem,
     isFavorite: Boolean,
+    sharedTransitionScope: SharedTransitionScope,
+    animatedVisibilityScope: AnimatedVisibilityScope,
     onClick: () -> Unit,
     onFavoriteToggle: () -> Unit
 ) {
@@ -215,13 +230,20 @@ fun ImageCard(
         colors = CardDefaults.cardColors(containerColor = MaterialTheme.colorScheme.surface)
     ) {
         Box {
-            AsyncImage(
-                model = image.url,
-                contentDescription = image.title,
-                modifier = Modifier.fillMaxSize(),
-                contentScale = ContentScale.Crop,
-                placeholder = painterResource(android.R.drawable.ic_menu_gallery)
-            )
+            with(sharedTransitionScope) {
+                AsyncImage(
+                    model = image.url,
+                    contentDescription = image.title,
+                    modifier = Modifier
+                        .fillMaxSize()
+                        .sharedElement(
+                            rememberSharedContentState(key = "image-${image.url}"),
+                            animatedVisibilityScope = animatedVisibilityScope
+                        ),
+                    contentScale = ContentScale.Crop,
+                    placeholder = painterResource(android.R.drawable.ic_menu_gallery)
+                )
+            }
             
             IconButton(
                 onClick = onFavoriteToggle,

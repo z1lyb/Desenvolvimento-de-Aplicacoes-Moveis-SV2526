@@ -2,6 +2,9 @@ package com.example.catmap.ui.screens
 
 import android.content.Intent
 import android.net.Uri
+import androidx.compose.animation.AnimatedVisibilityScope
+import androidx.compose.animation.ExperimentalSharedTransitionApi
+import androidx.compose.animation.SharedTransitionScope
 import androidx.compose.foundation.layout.*
 import androidx.compose.foundation.rememberScrollState
 import androidx.compose.foundation.verticalScroll
@@ -18,10 +21,12 @@ import coil.compose.AsyncImage
 import com.example.catmap.compose.R
 import com.example.catmap.ui.viewmodel.DetailViewModel
 
-@OptIn(ExperimentalMaterial3Api::class)
+@OptIn(ExperimentalMaterial3Api::class, ExperimentalSharedTransitionApi::class)
 @Composable
 fun DetailScreen(
     viewModel: DetailViewModel,
+    sharedTransitionScope: SharedTransitionScope,
+    animatedVisibilityScope: AnimatedVisibilityScope,
     onBack: () -> Unit
 ) {
     val image by viewModel.selectedImage.collectAsState()
@@ -51,14 +56,20 @@ fun DetailScreen(
                     .fillMaxSize()
                     .verticalScroll(rememberScrollState())
             ) {
-                AsyncImage(
-                    model = img.url,
-                    contentDescription = null,
-                    modifier = Modifier
-                        .fillMaxWidth()
-                        .height(300.dp),
-                    contentScale = ContentScale.Crop
-                )
+                with(sharedTransitionScope) {
+                    AsyncImage(
+                        model = img.url,
+                        contentDescription = null,
+                        modifier = Modifier
+                            .fillMaxWidth()
+                            .height(300.dp)
+                            .sharedElement(
+                                rememberSharedContentState(key = "image-${img.url}"),
+                                animatedVisibilityScope = animatedVisibilityScope
+                            ),
+                        contentScale = ContentScale.Crop
+                    )
+                }
 
                 Column(modifier = Modifier.padding(16.dp)) {
                     Text(

@@ -168,3 +168,23 @@ Goal: Adding a pull-to-refresh functionality to the main screen.
 Prompt: According to 08_implementation_plan.md step 18, add a pull-to-refresh functionality for the image grid in the jetpack app. This should replace the refresh button.
 
 Result: Pulling the screen creates a circle animation and progress bar at the top of the screen, until the images are refreshed. The refresh button no longer exists.
+
+---
+
+## MIP3 - Prompt 18
+
+Goal: Adding an animation between main and detail screens.
+
+Prompt: Add an animation between main and detail screens in the :app-compose module. This animation should enlarge the selected image until it reaches the desired final size when the user goes to the detail screen, and shrink it until it reaches the original size when the user goes back to the main screen.
+
+Result: When opening animal pages, their image enlarges until it reaches its final size. The inverse happens when going back to the main screen.
+
+---
+
+## MIP3 - Prompt 19
+
+Goal: Fixing an error in the pull-to-refresh functionality in the jetpack app, where two loading animations were shown.
+
+Prompt: When the app is opened, the pull-to-refresh loading animation shouldn't be there, only the one on the screen. The pull-to-refresh should only be there when pulling to refresh
+
+Result: The pull-to-refresh functionality now works as intended, without any errors and without showing two loading animations at the same time.
