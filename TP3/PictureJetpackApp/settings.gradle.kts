@@ -15,4 +15,4 @@ dependencyResolutionManagement {
 }
 
 rootProject.name = "CatMap"
-include(":core", ":app-xml")
+include(":core", ":app-xml", ":app-compose")

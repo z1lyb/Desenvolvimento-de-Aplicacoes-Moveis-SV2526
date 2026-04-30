@@ -137,4 +137,16 @@ Goal: Refactor the current app implementation into 3 modules according to the 08
 
 Prompt: Paying attention to the markdown files in the /docs folder, refactor the current application into the modules :core (which has the data models and API access), and :app-xml (which has the XML Views application related resources), which represents step 15 in the implementation plan. Make sure that the application still works as intended.
 
-Result: 
+Result: Two modules: :core and :app-xml created, with the application still working as intended.
+
+---
+
+## MIP3 - Prompt 15
+
+Goal: Creating a new app module for Jetpack Compose.
+
+Prompt: Create the :app-compose module, according to step 16 of the implementation plan. It should be a fully functional application, with all the existing features of the :app-xml module, adapting the application to Jetpack Compose. The application should work exactly the same way as the app-xml one, including the UI colors.
+
+Result: An application with the same features as the app-xml one, but implemented with Jetpack Compose.
+
+---
