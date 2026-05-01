@@ -1,98 +1,100 @@
-# Assignment 2 - Weather App
+# Tutorial 3 — JPCompose
 
 Course: Desenvolvimento de Aplicações Móveis  
-Student(s): Zilda Biai (51606)  
-Date: 12/04/2026  
-Repository URL: [PictureApp](https://github.com/z1lyb/Desenvolvimento-de-Aplicacoes-Moveis-SV2526/tree/main/TP2/PictureApp)
+Student: Zilda Biai (51606)  
+Date: 03/05/2026  
+Repository URL: [PictureJetpackApp](https://github.com/z1lyb/Desenvolvimento-de-Aplicacoes-Moveis-SV2526/tree/main/TP3/PictureJetpackApp)
 
 ---
-
-# Tutorial 2 - Assisted code generation (MIP-2)
+# Assisted code generation – MIP-3
 
 ## 1. Introduction
-O presente repositório foi criado no âmbito da disciplina de Desenvolvimento de Aplicações Móveis, durante a realização 
-do segundo tutorial da disciplina. Este relatório consistirá na descrição do trabalho referente à _**Section 3: Assisted code generation - MIP-2**_.  
-O seu objetivo é a planificação e implementação de uma aplicação que aceda a uma galeria de imagens através de uma API, com o auxílio da ferramenta Google Antigravity.
+Este projeto foi desenvolvido no âmbito da Unidade Curricular de Desenvolvimento de Aplicações Móveis (DAM), correspondendo ao desafio **Mission Impossible Possible - 3**. O objetivo principal consistiu na refatorização de uma aplicação Android existente (criada no Tutorial 2) para uma arquitetura multi-módulo, separando a lógica de acesso a dados para um módulo partilhado (`:core`) usado em duas interfaces: uma baseada em **XML Views** (`:app-xml`) e outra baseada em **Jetpack Compose** (`:app-compose`).
 
 ## 2. System Overview
-A aplicação criada, CatMap, é uma aplicação que permite explorar uma galeria de imagens de gatos através da "The Cat API". Os utilizadores podem ver e pesquisar por raças de animais, consultar informações sobre cada uma e adicionar até cinco fotos aos seus favoritos, assim como dar _refresh_ à página e observar o progresso de carregamento das imagens.
-A aplicação suporta o modo escuro e claro, adaptando-se ao sistema do dispositivo.
+A aplicação, **CatMap**, permite aos utilizadores explorar uma galeria de raças de gatos utilizando a "The Cat API". As suas principais funcionalidades incluem:
+- Visualização de uma grelha de imagens de gatos.
+- Pesquisa por raça.
+- Consulta de detalhes específicos (origem, temperamento, esperança de vida) com ligação externa à Wikipedia.
+- Gestão de favoritos com política FIFO (limite de 5 imagens).
+- Suporte para modos Claro e Escuro (Dark/Light Mode).
 
 ## 3. Architecture and Design
-A aplicação segue o modelo MVVM, tendo uma separação clara entre a interface do utilizador (View), a lógica de interação com os dados (ViewModel) e os dados importados da API (Model).
+O projeto adota uma arquitetura modular, promovendo a reutilização de código e a separação de responsabilidades (*Separation of Concerns*).
 
-As pastas são estruturadas da seguinte forma:
-* **data**: contém os dados importados da API
-* **model**: contém os modelos de dados, as classes **ImageItem** e **BreedInformation**
-* **network**: contém a lógica de interação com a API
-* **repository**: contém o repositório de dados, uma camada de abstração entre o ViewModel e a fonte de dados
-* **ui**: contém a interface do utilizador
-* **util**: classes que ajudam com a formatação da interface do utilizador
+### Estrutura de Módulos:
+- **`:core`**: Módulo de biblioteca Kotlin/Android que contém os modelos de dados (`ImageItem`, `Breed`), o cliente de API (Retrofit) e a camada de repositório (`CatRepository`). Este módulo é independente da interface gráfica.
+- **`:app-xml`**: Implementação da interface de utilizador "legacy" utilizando Activities e XML Layouts tradicionais.
+- **`:app-compose`**: Implementação moderna utilizando Jetpack Compose, seguindo padrões e estados reativos.
 
+O padrão de desenho utilizado é o **MVVM (Model-View-ViewModel)** em ambos os módulos de aplicação, garantindo que a lógica de estado é mantida de forma consistente.
 
 ## 4. Implementation
-O projeto foi implementado como uma aplicação Android utilizando o Kotlin e XML Views.  
-Componentes principais:
-* **MainActivity**: página principal que exibe a lista de imagens de gatos.
-* **DetailActivity**: página que exibe os detalhes de uma raça de gato, acessível ao clicar numa imagem da lista.
-* **FavoritesActivity**: página que exibe a lista de imagens de gatos favoritas, acessível ao clicar no ícone de coração no canto superior direito da MainActivity. Os favoritos são guardados usando uma lógica FIFO (First-In, First-Out), onde ao se adicionar um sexto item, o primeiro é retirado.
+A implementação focou-se na paridade de funcionalidades entre as duas UIs, com o módulo Compose a introduzir melhorias exclusivas.
 
+### Destaques da Implementação:
+- **Injeção de Dependências/Repositórios**: O `CatRepository` centraliza o acesso à API e a persistência em memória dos favoritos, sendo injetado nos ViewModels de ambos os módulos.
+- **Jetpack Compose (Exclusive Features)**:
+  - **Shared Element Transitions**: Animações fluidas entre a grelha principal e o ecrã de detalhes, onde a imagem selecionada expande/encolhe suavemente.
+  - **Pull-to-Refresh**: Substituição do botão de atualização por um gesto de "puxar para atualizar".
+  - **Animações de Interface**: Indicador de escrita a piscar durante a escrita na barra de pesquisa e barra de progresso linear subtil durante o carregamento.
+  - **Navegação Declarativa**: Utilização do `NavHost` com passagem de argumentos JSON codificados.
 
 ## 5. Testing and Validation
-A aplicação foi testada num dispositivo Android real, em cenários diferentes para testar cada uma das funcionalidades:
-* Carregamento de imagens
-* Pesquisa de animais por raça
-* Adição de imagens aos favoritos
-* Mudança entre modo escuro e claro
-* Erros de acesso à API
+A validação foi realizada através de testes manuais num dispositivo Android real, focando-se em:
+- **Navegação**: Verificação da transição correta entre ecrãs em ambos os módulos.
+- **Paridade**: Garantir que as cores, textos e lógica de favoritos são idênticos entre XML e Compose.
+- **Funcionalidades exclusivas**: Teste do gesto de pull-to-refresh e da suavidade das animações de elementos partilhados.
+- **Robustez**: Tratamento de erros de rede e estados de carregamento (*loading states*).
 
 ## 6. Usage Instructions
-Para executar o projeto, é necessário ter o Android Studio instalado e um dispositivo Android ou emulador.  
-1. Abrir o projeto no Android Studio
-2. Sincronizar o projeto com o Gradle
-3. Correr a aplicação com o dispositivo ou emulador conectado
+1. Abrir o projeto no **Android Studio**.
+2. Sincronizar o projeto com o **Gradle**.
+3. Selecionar a configuração de execução pretendida:
+   - `app-xml`: Para testar a versão com XML Views.
+   - `app-compose`: Para testar a versão com Jetpack Compose.
+4. Executar num emulador ou dispositivo físico com API 24+.
 
 ---
 
-# Autonomous Software Engineering Sections - only for [AC OK, AI OK] sections
+# Autonomous Software Engineering Sections
 
 ## 7. Prompting Strategy
-O projeto foi desenvolvido a usar uma _prompting strategy_ centrada na documentação. O plano de implementação e documentos de descrição dos componentes e funcionalidades da aplicação foram criados previamente ao seu uso, e colocados na pasta `/docs`.  
-Todas as prompts utilizadas, assim como os seus objetivos e resultados foram guardados no documento `/docs/prompts_log.md`.
+A estratégia de *prompting* foi baseada no planeamento prévio. Foram utilizados os documentos Markdown da pasta `/docs` como guia para as interações com o agente AntiGravity. As prompts evoluíram de requisitos arquiteturais (refatoração para módulos) para detalhes de UI finos (cores específicas, animações personalizadas), sempre mantendo um registo histórico em `docs/prompts_log.md`.
 
 ## 8. Autonomous Agent Workflow
-O desenvolvimento foi realizado pelo agente IA autónomo, seguindo as fases seguintes de trabalho:
-1. **Planeamento**: analisar os requisitos e criar um plano de implementação
-2. **Fundação**: criar a estrutura e dependências do projeto
-3. **Programação iterativa**: implementar as funcionalidades do projeto
-4. **Documentação**: documentar as alterações realizadas para refletirem o estado atual da aplicação
+O agente AntiGravity foi fundamental em:
+- **Refatoração**: Migração automática de classes para o módulo `:core` e ajuste de pacotes.
+- **Implementação Compose**: Geração de ecrãs composables baseados nos layouts XML existentes.
+- **Debugging**: Resolução de erros de compilação após atualizações de versões de bibliotecas (BOM) para suportar animações avançadas.
 
 ## 9. Verification of AI-Generated Artifacts
-Foi verificada a correção do código gerado através de testes manuais e análise estática.
+O código gerado foi verificado através de:
+- **Revisão Manual**: Análise do código Kotlin gerado para garantir conformidade com as diretrizes do projeto.
+- **Compilação Iterativa**: Testes de build frequentes para detetar erros de injeção de dependências ou parâmetros ausentes.
 
 ## 10. Human vs AI Contribution
-O agente IA autónomo foi responsável por configurar e implementar a aplicação, enquanto o utilizador foi responsável por fornecer os requisitos, prompts e validar o desenvolvimento com testes e revisão de código.
+- **Humano**: Definição da arquitetura, supervisão do plano de implementação, validação visual e testes funcionais.
+- **IA**: Execução da refatorização modular, implementação dos ecrãs Compose, criação de animações complexas e documentação técnica.
 
 ## 11. Ethical and Responsible Use
-O uso de IA foi feito de forma responsável, com o utilizador a garantir que o código gerado era ético e não continha fontes ou informações inapropriadas. Pode haver o risco de terem sido gerados algoritmos menos eficientes que outros disponíveis, mas que cumprem os requisitos do trabalho.
+O uso da IA foi transparente e supervisionado. Todas as sugestões de código foram validadas pelo utilizador para garantir que a lógica de negócio (especialmente a gestão de favoritos e acesso a dados) permanecia precisa e ética.
 
 ---
 
 # Development Process
 
 ## 12. Version Control and Commit History
-O controlo de versão foi realizado através do GitHub, com o seu histórico de commits a refletir o trabalho contínuo realizado durante o desenvolvimento do projeto.
+Utilizou-se o Git para o controlo de versões, com commits incrementais que refletem cada etapa do desenvolvimento (Modularização -> XML Refactor -> Compose UI -> Advanced Features).
 
 ## 13. Difficulties and Lessons Learned
-As dificuldades principais enfrentadas na criação da aplicação foram a compreensão da arquitetura MVVM e de como aplicar esta arquitetura no projeto, a partir do modelo de implementação e do código gerado.  
-Considero ter ganho uma boa compreensão do modelo acima, assim como de como utilizar agentes de IA para auxiliar no desenvolvimento de software.
+O maior desafio foi a implementação das **Shared Element Transitions** no Compose, que exigiu a atualização das dependências para versões experimentais (Compose 1.7.0+) e a adaptação das APIs de navegação. Aprendeu-se a importância de uma base de código modular para permitir a coexistência de diferentes paradigmas de UI.
 
 ## 14. Future Improvements
-* Apoio ao uso offline da aplicação, ao manter ficheiros em cache
-* Implementação de um "scroll infinito", que continuaria a carregar imagens à medida que o utilizador navega pela lista
+- Implementação de persistência local definitiva para favoritos e cache de imagens.
+- Implementação de suporte para layouts adaptativos (Tablets).
 
 ---
 
 ## 15. AI Usage Disclosure (Mandatory)
-O projeto foi desenvolvido tirando partido do agente de código Google Antigravity, que auxiliou na implementação das funcionalidades da aplicação.  
-O agente foi utilizado de forma iterativa, com o utilizador a fornecer prompts e a validar o desenvolvimento com testes e revisão de código. Deste modo, mantenho a responsabilidade por todo o conteúdo gerado e a sua apresentação.
+Este projeto utilizou a ferramenta de IA **Google AntiGravity** para a geração e refatoração de código, sob a supervisão e validação do autor, que assume total responsabilidade pelo conteúdo final.
