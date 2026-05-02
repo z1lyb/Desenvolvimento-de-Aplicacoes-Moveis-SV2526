@@ -82,5 +82,5 @@ Aprendeu-se a utilizar o `ClassName` do KotlinPoet para referenciar tipos nulos.
 ---
 
 ## 15. AI Usage Disclosure (Mandatory)
-Relatório atualizado com auxílio de IA (Google Gemini) para incluir a componente de Regex Annotation Processing. 
+Relatório realizado com auxílio de IA (Google Gemini). 
 A autora validou todas as descrições técnicas face ao código implementado.
