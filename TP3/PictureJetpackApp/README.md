@@ -1,4 +1,4 @@
-# Tutorial 3 — JPCompose
+# Tutorial 3 — Assisted code generation – MIP-3
 
 Course: Desenvolvimento de Aplicações Móveis  
 Student: Zilda Biai (51606)  
@@ -6,7 +6,6 @@ Date: 03/05/2026
 Repository URL: [PictureJetpackApp](https://github.com/z1lyb/Desenvolvimento-de-Aplicacoes-Moveis-SV2526/tree/main/TP3/PictureJetpackApp)
 
 ---
-# Assisted code generation – MIP-3
 
 ## 1. Introduction
 Este projeto foi desenvolvido no âmbito da Unidade Curricular de Desenvolvimento de Aplicações Móveis (DAM), correspondendo ao desafio **Mission Impossible Possible - 3**. O objetivo principal consistiu na refatorização de uma aplicação Android existente (criada no Tutorial 2) para uma arquitetura multi-módulo, separando a lógica de acesso a dados para um módulo partilhado (`:core`) usado em duas interfaces: uma baseada em **XML Views** (`:app-xml`) e outra baseada em **Jetpack Compose** (`:app-compose`).
